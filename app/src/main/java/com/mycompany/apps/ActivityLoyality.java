@@ -35,7 +35,7 @@ public class ActivityLoyality extends Activity implements View.OnClickListener {
         actionBar.setIcon(R.drawable.w);
         ImageButton imageButton = (ImageButton) findViewById(R.id.loyal1);
         ImageButton imageButton2 = (ImageButton) findViewById(R.id.loyal2);
-        ImageButton imageButton3 = (ImageButton) findViewById(R.id.loyal3);
+       // ImageButton imageButton3 = (ImageButton) findViewById(R.id.loyal3);
         ImageButton imageButton4 = (ImageButton) findViewById(R.id.loyal4);
         ImageButton imageButton5 = (ImageButton) findViewById(R.id.loyal5);
         ImageButton imageButton6 = (ImageButton) findViewById(R.id.loyal6);
@@ -45,7 +45,7 @@ public class ActivityLoyality extends Activity implements View.OnClickListener {
         ImageButton imageButton10 = (ImageButton) findViewById(R.id.loyal10);
         imageButton.setOnClickListener(this);
         imageButton2.setOnClickListener(this);
-        imageButton3.setOnClickListener(this);
+       // imageButton3.setOnClickListener(this);
         imageButton4.setOnClickListener(this);
         imageButton5.setOnClickListener(this);
         imageButton6.setOnClickListener(this);
@@ -69,10 +69,10 @@ public class ActivityLoyality extends Activity implements View.OnClickListener {
                 Intent intent1 = new Intent(this, Activityloyalityaccural.class);
                 startActivity(intent1);
                 break;
-            case R.id.loyal3:
+         /*   case R.id.loyal3:
                 Intent intent2 = new Intent(this, Activityreport.class);
                 startActivity(intent2);
-                break;
+                break;*/
             case R.id.loyal4:
                 Intent intent3 = new Intent(this, Activity_Media.class);
                 startActivity(intent3);

@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="15dp"
+        android:background="#fffdd0"
             android:gravity="left"
         android:weightSum="1">
 
@@ -124,11 +125,26 @@
         <Button
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="30px"
             android:layout_height="wrap_content"
             android:id="@+id/submitpaymentbtn"
             android:textColor="#ffffff"
             android:text=" SUBMIT "
+            android:ems="12"
+            android:fontFamily="sans-serif"
+            android:onClick="view"
+            android:background="#ff3300"
+
+            />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel"
+            android:textColor="#ffffff"
+            android:text=" CANCEL "
             android:ems="12"
             android:fontFamily="sans-serif"
             android:onClick="view"

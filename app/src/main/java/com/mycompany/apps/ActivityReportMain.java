@@ -84,7 +84,7 @@ public class ActivityReportMain extends Activity implements View.OnClickListener
                 startActivity(intent7);
                 break;
             case R.id.purchasereportimage:
-                Intent intent8 = new Intent(this,ProcurementReportActivity.class);
+                Intent intent8 = new Intent(this,ReportTabActivityPurchasing.class);
                 startActivity(intent8);
                 break;
         }

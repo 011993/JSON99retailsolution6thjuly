@@ -81,7 +81,7 @@
                     android:inputType="number"
                     android:textColor="#000000"
                     android:text="Dr Name"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="serif"
                     android:ems="10"
                     android:id="@+id/tv_reason"
                     android:textSize="14px"
@@ -145,6 +145,7 @@
                     android:textColor="#000000"
                     android:fontFamily="sans-serif"
                     android:inputType="text"
+                    android:digits="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0,1,2,3,4,5,6,7,8,9"
                     android:hint="Itemproduct"
                     android:ems="10"
                     android:textSize="15px"
@@ -181,7 +182,6 @@
                     android:text="PRODUCT NAME"
                     android:focusable="false"
                     android:ems="10"
-                    android:fontFamily="sans-serif"
                     android:id="@+id/productname"
                     android:textSize="12px"
                     android:gravity="center"
@@ -193,7 +193,6 @@
                     android:inputType="number"
                     android:textColor="#ffffff"
                     android:focusable="false"
-                    android:fontFamily="sans-serif"
                     android:text="BATCH.NO"
                     android:ems="10"
                     android:id="@+id/batchno"
@@ -212,7 +211,6 @@
                     android:id="@+id/expirydate"
                     android:textSize="12px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
                 <!--  <TextView
@@ -239,7 +237,6 @@
                     android:id="@+id/sellingprice"
                     android:textSize="12px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
@@ -253,7 +250,6 @@
                     android:id="@+id/Quantity"
                     android:textSize="12px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
 
@@ -269,7 +265,6 @@
                     android:id="@+id/stock"
                     android:textSize="12px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
@@ -283,7 +278,6 @@
                     android:id="@+id/Mrp"
                     android:textSize="12px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
                 <!--  <TextView
@@ -311,7 +305,6 @@
                     android:ems="10"
                     android:id="@+id/uom"
                     android:textSize="12px"
-                    android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:layout_gravity="center_vertical"
                     />
@@ -327,7 +320,6 @@
                     android:id="@+id/total"
                     android:textSize="12px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
             </LinearLayout>
@@ -388,7 +380,6 @@
                             android:textColor="#000000"
                             android:id="@+id/totalitems"
                             android:textSize="14px"
-                            android:fontFamily="sans-serif"
                             android:layout_gravity="center_vertical"
                             android:gravity="left"
                             />
@@ -410,7 +401,6 @@
                             android:id="@+id/totalitem_textt"
                             android:textSize="14px"
                             android:layout_gravity="center_vertical"
-                            android:fontFamily="sans-serif"
                             android:gravity="left"
                             />
                     </LinearLayout>
@@ -437,7 +427,6 @@
                             android:textColor="#000000"
                             android:id="@+id/totalsavings"
                             android:textSize="14px"
-                            android:fontFamily="sans-serif"
                             android:layout_gravity="center_vertical"
                             android:gravity="left"
                             />
@@ -458,7 +447,6 @@
                             android:id="@+id/totalsavings_textt"
                             android:textSize="14px"
                             android:layout_gravity="center_vertical"
-                            android:fontFamily="sans-serif"
                             android:gravity="left"
                             />
                     </LinearLayout>
@@ -634,7 +622,6 @@
                             android:layout_gravity="center_vertical"
                             android:gravity="right"
                             android:layout_marginRight="60dp"
-                            android:fontFamily="sans-serif"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -655,7 +642,6 @@
                             android:textSize="14px"
                             android:layout_gravity="center_vertical"
                             android:gravity="right"
-                            android:fontFamily="sans-serif"
                             android:layout_marginRight="10dp"
                             />
                     </LinearLayout>
@@ -785,7 +771,6 @@
                         android:textSize="20px"
                         android:gravity="center"
 
-                        android:fontFamily="sans-serif"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/button_background"
                         android:onClick="view"
@@ -805,7 +790,6 @@
                         android:textSize="20px"
                         android:gravity="center"
 
-                        android:fontFamily="sans-serif"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/button_background"
                         android:onClick="view"
@@ -982,7 +966,6 @@
                     android:text="CREDIT NOTES"
                     android:background="@drawable/button_background"
                     android:textColor="#000000"
-                    android:fontFamily="sans-serif"
                     android:textSize="10px"
                     android:onClick="view">
 

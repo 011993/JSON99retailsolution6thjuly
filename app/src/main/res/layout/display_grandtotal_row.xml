@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Sub"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="#2787A4"
-    android:id="@+id/Sub">
+    android:layout_height="50dp"
+    android:background="#2787A4">
 
     <LinearLayout
         android:id="@+id/linearlayout1"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:weightSum="60.0"
         android:layout_alignParentStart="true"
+        android:layout_weight="10.0"
+        android:background="#ffffff"
+        android:orientation="horizontal"
         android:textAlignment="textStart"
-        android:layout_weight="10.0">
+        android:weightSum="150.0">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
+            android:background="#ffffff">
+
+            <TextView
+                android:id="@+id/rowtvTri_Id"
+                android:layout_width="350dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:text="Grand Total"
+                android:textColor="#000000"
+                android:textSize="14px" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -26,13 +43,13 @@
 
             <TextView
                 android:id="@+id/rowtvGrand_Total"
-                android:layout_width="280dp"
+                android:layout_width="350dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
                 android:text="Grand Total"
                 android:textColor="#000000"
-                android:textSize="14px"
-                android:layout_gravity="center"
-                android:gravity="center" />
+                android:textSize="14px" />
 
             </LinearLayout>
 
@@ -44,13 +61,52 @@
 
                 <TextView
                     android:id="@+id/rowtvUOM"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
                     android:text="Grand Total"
                     android:textColor="#000000"
-                    android:textSize="14px"
+                    android:textSize="14px" />
+
+                </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
+            android:background="#ffffff">
+
+            <TextView
+                    android:id="@+id/rowtvProdNm"
+                    android:layout_width="350dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:gravity="center" />
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="Grand Total"
+                    android:textColor="#000000"
+                    android:textSize="14px"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
+            android:background="#ffffff">
+
+                <TextView
+                    android:id="@+id/rowtvBatch"
+                    android:layout_width="350dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="BATCH NO"
+                    android:textColor="#000000"
+                    android:textSize="14px"/>
+
 
         </LinearLayout>
 

@@ -10,18 +10,16 @@
     android:background="#ff9033"
     android:divider="@android:color/background_light">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingBottom="2dp">
+        android:paddingTop="5dp">
 
         <TextView
             android:layout_width="190dp"
             android:layout_height="40dp"
-            android:text="GRN Id"
+            android:text="PRODUCT ID"
             android:textColor="#000000"
             android:id="@+id/id"
             android:textStyle="bold"
@@ -46,6 +44,153 @@
             android:layout_gravity="center_vertical" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="3dp"
+        android:paddingBottom="2dp">
+
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="Select From Date, Month And Year"
+            android:textColor="#000000"
+            android:id="@+id/from"
+            android:textStyle="bold"
+            android:ems="10"
+            android:textSize="14dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="left" />
+
+        <Spinner
+            android:id="@+id/DaysFromDate"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:ems="10"
+            android:spinnerMode="dropdown"
+            android:textSize="12px"
+            android:focusable="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/border_style"
+            android:layout_gravity="center_vertical"/>
+
+        <Spinner
+            android:id="@+id/DaysFromMonth"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:ems="10"
+            android:spinnerMode="dropdown"
+            android:textSize="12px"
+            android:focusable="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/border_style"
+            android:layout_gravity="center_vertical"/>
+
+        <Spinner
+            android:id="@+id/DaysFromYear"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:ems="10"
+            android:spinnerMode="dropdown"
+            android:textSize="12px"
+            android:focusable="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/border_style"
+            android:layout_gravity="center_vertical"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="3dp"
+        android:paddingBottom="2dp">
+
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="Select To Date, Month And Year"
+            android:textColor="#000000"
+            android:id="@+id/to"
+            android:textStyle="bold"
+            android:ems="10"
+            android:textSize="14dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="left" />
+
+        <Spinner
+            android:id="@+id/DaysToDate"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:ems="10"
+            android:spinnerMode="dropdown"
+            android:textSize="12px"
+            android:focusable="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/border_style"
+            android:layout_gravity="center_vertical"/>
+
+        <Spinner
+            android:id="@+id/DaysToMonth"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:ems="10"
+            android:spinnerMode="dropdown"
+            android:textSize="12px"
+            android:focusable="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/border_style"
+            android:layout_gravity="center_vertical"/>
+
+        <Spinner
+            android:id="@+id/DaysToYear"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:ems="10"
+            android:spinnerMode="dropdown"
+            android:textSize="12px"
+            android:focusable="true"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/border_style"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="280dp"
+        android:paddingBottom="4dp"
+        android:id="@+id/layout4">
+
+        <Button
+            android:id="@+id/Submit"
+            android:text="Submit"
+            android:background="#009985"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linearlayout1"
@@ -129,6 +274,19 @@
             android:layout_width="90dp"
             android:layout_height="30dp"
             android:id="@+id/tvDate"
+            android:textColor="#ffffff"
+            android:layout_weight="25.0"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:fontFamily="sans_serif"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <TextView
+            android:text="DAYS"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:id="@+id/tvDays"
             android:textColor="#ffffff"
             android:layout_weight="25.0"
             android:textStyle="bold"

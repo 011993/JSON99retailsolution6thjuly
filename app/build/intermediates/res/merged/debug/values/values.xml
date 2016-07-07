@@ -9,6 +9,10 @@
         <item>N</item>
         <item>All</item>
     </string-array>
+    <string-array name="active_Statusinventory">
+        <item>N</item>
+        <item>Y</item>
+    </string-array>
     <string-array name="active_array">
         <item>"Retail_ad_ticker"</item>
         <item>"Retail_ad_blinkinglogo"</item>

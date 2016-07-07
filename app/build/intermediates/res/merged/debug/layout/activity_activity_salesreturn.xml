@@ -23,16 +23,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="1.0"
+                android:paddingBottom="5dp"
 
                 >
 
                 <TextView
-                    android:layout_width="150px"
+                    android:layout_width="120px"
                     android:layout_height="36px"
                     android:inputType="number"
                     android:textColor="#000000"
                     android:text="Invoice No"
-                    android:fontFamily="sans-serif"
                     android:ems="10"
                     android:id="@+id/tv_invoiceno"
                     android:textSize="20px"
@@ -40,40 +40,39 @@
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
-                    android:layout_width="200px"
-                    android:layout_height="40px"
+                    android:layout_width="180px"
+                    android:layout_height="36px"
                     android:inputType="number"
                     android:textColor="#000000"
                     android:fontFamily="sans-serif"
                     android:ems="10"
                     android:id="@+id/invoiceno"
                     android:textSize="18px"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/cust"
                     android:background="@drawable/border_style" />
                 <TextView
-                    android:layout_width="190px"
+                    android:layout_width="140px"
                     android:layout_height="36px"
                     android:inputType="number"
                     android:textColor="#000000"
                     android:text="Return Reason"
-                    android:fontFamily="sans-serif"
                     android:ems="10"
                     android:id="@+id/tv_reason"
                     android:textSize="20px"
-                    android:paddingLeft="5px"
+
                     android:layout_gravity="center_vertical"
                     />
                 <Spinner
-                    android:layout_width="240dp"
+                    android:layout_width="330dp"
                     android:layout_height="36px"
                     android:textColor="#000000"
                     android:ems="10"
                     android:layout_marginEnd="5dp"
                     android:id="@+id/reasonreturn"
                     android:textSize="14px"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     >
@@ -82,7 +81,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+           <!-- <LinearLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,28 +90,28 @@
                 android:paddingBottom="5dp"
 
                 >
-                <AutoCompleteTextView
+                &lt;!&ndash;<AutoCompleteTextView&ndash;&gt;
 
-                    android:id="@+id/autoProductName"
-                    android:layout_width="790px"
-                    android:layout_height="40px"
+                    &lt;!&ndash;android:id="@+id/autoProductName"&ndash;&gt;
+                    &lt;!&ndash;android:layout_width="790px"&ndash;&gt;
+                    &lt;!&ndash;android:layout_height="40px"&ndash;&gt;
 
-                    android:textColor="#000000"
-                    android:fontFamily="sans-serif"
-                    android:inputType="text"
-                    android:hint="Itemproduct"
-                    android:ems="10"
-                    android:textSize="15px"
-                    android:focusable="true"
-                    android:layout_gravity="center_vertical"
-                    android:drawableLeft="@drawable/cust"
-                    android:background="@drawable/border_style" >
-                </AutoCompleteTextView>
-
-
+                    &lt;!&ndash;android:textColor="#000000"&ndash;&gt;
+                    &lt;!&ndash;android:fontFamily="sans-serif"&ndash;&gt;
+                    &lt;!&ndash;android:inputType="text"&ndash;&gt;
+                    &lt;!&ndash;android:hint="Itemproduct"&ndash;&gt;
+                    &lt;!&ndash;android:ems="10"&ndash;&gt;
+                    &lt;!&ndash;android:textSize="15px"&ndash;&gt;
+                    &lt;!&ndash;android:focusable="true"&ndash;&gt;
+                    &lt;!&ndash;android:layout_gravity="center_vertical"&ndash;&gt;
+                    &lt;!&ndash;android:drawableLeft="@drawable/cust"&ndash;&gt;
+                    &lt;!&ndash;android:background="@drawable/border_style" >&ndash;&gt;
+                &lt;!&ndash;</AutoCompleteTextView>&ndash;&gt;
 
 
-                <!--<Button
+
+
+                &lt;!&ndash;<Button
                     android:layout_width="36px"
                     android:layout_height="36px"
                     android:id="@+id/batchno_button"
@@ -124,10 +123,10 @@
                     android:fontFamily="sans-serif"
                     android:onClick="view"
                     />
-    -->
+    &ndash;&gt;
 
             </LinearLayout>
-
+-->
 
 
             <LinearLayout
@@ -138,6 +137,7 @@
                 android:background="#4a4a4a"
 
                 android:paddingTop="5dp"
+                android:paddingBottom="5dp"
 
                 >
                 <!--<TextView-->
@@ -176,7 +176,7 @@
                     android:id="@+id/product6"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
+
                     android:layout_gravity="center_vertical"
 
                     />
@@ -193,7 +193,6 @@
                     android:id="@+id/product7"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
 
@@ -207,7 +206,6 @@
                 android:id="@+id/product8"
                 android:textSize="14px"
                 android:gravity="center"
-                android:fontFamily="sans-serif"
                 android:layout_gravity="center_vertical"
                 />
 
@@ -222,7 +220,6 @@
                     android:id="@+id/product9se"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"/>
 
                 <!--
@@ -252,7 +249,6 @@
                     android:id="@+id/product9"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
@@ -267,7 +263,6 @@
                     android:id="@+id/product10"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
 
@@ -281,7 +276,6 @@
                     android:id="@+id/product12"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
             </LinearLayout>
@@ -338,7 +332,6 @@
                             android:textSize="18px"
                             android:layout_gravity="center_vertical"
                             android:gravity="left"
-                            android:fontFamily="sans-serif-medium"
                             />
 
 
@@ -353,7 +346,6 @@
                             android:textSize="18px"
                             android:layout_gravity="center_vertical"
                             android:gravity="center"
-                            android:fontFamily="sans-serif"
 
                             />
 
@@ -401,7 +393,6 @@
                         android:textColor="#000000"
                         android:text="Submit"
                         android:ems="10"
-                        android:fontFamily="sans-serif"
                         android:id="@+id/salesreturn_submit"
                         android:textSize="24px"
                         android:gravity="center"
@@ -429,7 +420,6 @@
                     android:textColor="#000000"
                     android:text="Clear"
                     android:ems="10"
-                    android:fontFamily="sans-serif"
                     android:id="@+id/clear"
                     android:textSize="24px"
                     android:gravity="center"

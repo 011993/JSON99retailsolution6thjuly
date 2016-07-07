@@ -9,14 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.mycompany.apps.AdTickerReportActivity;
-import com.mycompany.apps.ProcurementReportActivity;
 import com.mycompany.apps.R;
 
 import java.util.ArrayList;
 
 import Pojo.AdTickerReportModel;
-import Pojo.VendorReportModel;
-
 
 
 public class AdTickerReportAdapter extends BaseAdapter {

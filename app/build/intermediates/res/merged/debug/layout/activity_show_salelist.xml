@@ -18,41 +18,14 @@
         android:layout_height="30dp"
         android:background="#4a4a4a"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp">
-
-        <TextView
-            android:id="@+id/tvnm"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:fontFamily="sans_serif"
-            android:gravity="left"
-            android:text="PRODUCT NAME"
-            android:textColor="#ffffff"
-            android:textSize="14dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvbatch"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:fontFamily="sans_serif"
-            android:gravity="left"
-            android:text="BATCH NO"
-            android:textColor="#ffffff"
-            android:textSize="14dp"
-            android:textStyle="bold" />
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvdate"
-            android:layout_width="150dp"
+            android:layout_width="220dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:fontFamily="sans_serif"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="EXP DATE"
             android:textColor="#ffffff"
             android:textSize="14dp"
@@ -60,23 +33,32 @@
 
         <TextView
             android:id="@+id/tvprice"
-            android:layout_width="150dp"
+            android:layout_width="220dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:fontFamily="sans_serif"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="S PRICE"
             android:textColor="#ffffff"
             android:textSize="14dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvqty"
-            android:layout_width="130dp"
+            android:id="@+id/tvlast"
+            android:layout_width="220dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:fontFamily="sans_serif"
-            android:gravity="left"
+            android:gravity="center_vertical"
+            android:text="SALE DATE"
+            android:textColor="#ffffff"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvqty"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
             android:text="QTY"
             android:textColor="#ffffff"
             android:textSize="14dp"
@@ -84,12 +66,22 @@
 
         <TextView
             android:id="@+id/tvmrp"
-            android:layout_width="110dp"
+            android:layout_width="220dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:fontFamily="sans_serif"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="MRP"
+            android:textColor="#ffffff"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvday"
+            android:layout_width="220dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="DAYS"
             android:textColor="#ffffff"
             android:textSize="14dp"
             android:textStyle="bold" />

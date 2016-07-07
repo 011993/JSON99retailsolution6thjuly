@@ -3,6 +3,7 @@ package Adapter;
 import android.content.Context;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,11 +17,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mycompany.apps.DecimalDigitsInputFilter;
 import com.mycompany.apps.R;
 import com.mycompany.apps.VendorReturnActivity;
 
 
-
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import Pojo.VendorReturnModel;
 
@@ -83,6 +85,8 @@ public class VendorReturnProductListAdapter extends BaseAdapter {
     }
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
+        DecimalFormat f = new DecimalFormat("##.0");
+
         if(convertView==null){
             holder= new ViewHolder();
             layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -95,8 +99,11 @@ public class VendorReturnProductListAdapter extends BaseAdapter {
             holder.Stock=(TextView)convertView.findViewById(R.id.StockVendorReturn);
             holder.Uom=(TextView)convertView.findViewById(R.id.uomVendorReturn);
             holder.Total=(TextView)convertView.findViewById(R.id.totalVendorReturn);
+            holder.Total.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7,2)});
+
+
             holder.DeleteButton=(ImageButton)convertView.findViewById(R.id.deleteButtonVendorReturn);
-            holder.FreeQty=(TextView)convertView.findViewById(R.id.FreeVendorReturn);
+           // holder.FreeQty=(TextView)convertView.findViewById(R.id.FreeVendorReturn);
             convertView.setTag(holder);
 
 
@@ -109,13 +116,13 @@ public class VendorReturnProductListAdapter extends BaseAdapter {
         holder.ProductName.setText(list.get(position).getProductName());
         holder.ExpDate.setText(list.get(position).getExpdate());
         holder.BatchNumber.setText(list.get(position).getBatchno());
-        holder.FreeQty.setText(list.get(position).getFreeQty());
+      //  holder.FreeQty.setText(list.get(position).getFreeQty());
         // holder.SellingPrice.setText(String.format("%.2f",list.get(position).getSprice()));
         if( (holder.PurchasePrice.getTag() != null)  && (holder.PurchasePrice.getTag() instanceof TextWatcher) ) {
             holder.PurchasePrice.removeTextChangedListener((TextWatcher) holder.PurchasePrice.getTag() );
         }
 
-        holder.PurchasePrice.setText(list.get(position).getPprice());
+        holder.PurchasePrice.setText(String.format("%.2f",list.get(position).getPprice()));
         holder.Uom.setText(list.get(position).getUOM());
         holder.Stock.setText(String.format("%.2f",list.get(position).getStock()));
 
@@ -152,7 +159,7 @@ public class VendorReturnProductListAdapter extends BaseAdapter {
                     }
                     holder.Total.setText(String.valueOf(Double.parseDouble(holder.PurchasePrice.getText().toString()) * Double.parseDouble(holder.productQuantity.getText().toString())));
                     list.get(position).setProductQuantity(Float.parseFloat(holder.productQuantity.getText().toString()));
-                    list.get(position).setPprice((holder.PurchasePrice.getText().toString()));
+                    list.get(position).setPprice(Float.parseFloat(holder.PurchasePrice.getText().toString()));
 
                     Log.e("&&&total&&&&", "$$$$$" + holder.Total.getText().toString());
                     activity.setSummaryRow();

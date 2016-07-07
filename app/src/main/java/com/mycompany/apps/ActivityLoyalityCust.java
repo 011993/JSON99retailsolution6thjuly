@@ -61,7 +61,7 @@ public class ActivityLoyalityCust extends Activity implements View.OnClickListen
                 startActivity(intent3);
                 break;
             case R.id.Sales_Reports:
-                Intent in4 = new Intent(this,SaleReportActivity.class);
+                Intent in4 = new Intent(this,ReportTabActivitySalesReport.class);
                 startActivity(in4);
                 break;
             case R.id.OthersReports:

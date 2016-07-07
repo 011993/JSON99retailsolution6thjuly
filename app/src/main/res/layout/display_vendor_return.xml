@@ -95,7 +95,7 @@
             android:layout_gravity="left|center"
             android:gravity="center"
             android:textAppearance="?android:textAppearanceLarge"/>
-        <TextView
+       <!-- <TextView
             android:id="@+id/FreeVendorReturn"
             android:layout_height="fill_parent"
             android:layout_width="70px"
@@ -106,7 +106,7 @@
             android:layout_gravity="left|center"
             android:gravity="center"
             android:textAppearance="?android:textAppearanceLarge"/>
-        <TextView
+       --> <TextView
             android:id="@+id/totalVendorReturn"
             android:layout_height="fill_parent"
             android:layout_width="75px"

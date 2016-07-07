@@ -224,7 +224,7 @@ public class Activity_Installation extends Activity implements OnClickListener {
     String tablename_28="retail_str_sales_detail";
     String tablename_29="retail_str_sales_details_return";
     String tablename_30="retail_str_sales_master_return";
-    String tablename_31="retail_str_stock_master";
+    String tablename_31="retail_str_sales_master";
     String tablename_32="retail_str_vendor_detail_return";
     String tablename_33="retail_str_vendor_master_return";
     String tablename_34="retail_tax";
@@ -2878,7 +2878,7 @@ public class Activity_Installation extends Activity implements OnClickListener {
 
                 JSONParserSync rh = new JSONParserSync();
                 String s1 = rh.sendGetRequestParam(Config.LINK_JSON, STORE_ID);
-
+                loading.getProgress();
                 Intent ii = new Intent(Activity_Installation.this, Activity_masterScreen1.class);
 
                 startActivity(ii);
@@ -2965,7 +2965,7 @@ public class Activity_Installation extends Activity implements OnClickListener {
                 if (success == 1) {
                     Log.d("Successfully Login!", json.toString());
 
-                    Intent ii = new Intent(Activity_Installation.this,Activity_masterScreen1.class);
+                    Intent ii = new Intent(Activity_Installation.this,login.class);
                     ii.putExtra("Store_Id", username );
                     startActivity(ii);
                     finish();

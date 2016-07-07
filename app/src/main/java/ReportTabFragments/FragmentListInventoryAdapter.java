@@ -91,6 +91,7 @@ public class FragmentListInventoryAdapter extends BaseAdapter {
         holder.TVBATCH.setText(list.get(position).getBatch());
         holder.TVEXPIRY.setText(list.get(position).getExpiry());
         holder.TVQUANTITY.setText(list.get(position).getQuantity());
+
         String StrExpdate = list.get(position).getExpiry();
         // Log.e("#get exp date from db", StrExpdate.toString());
         Date date = new Date();

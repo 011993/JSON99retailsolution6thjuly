@@ -71,6 +71,16 @@ public class SaleReportModel {
     String Uom;
     String Mrp;
 
+    public String getSaleDate() {
+        return SaleDate;
+    }
+
+    public void setSaleDate(String saleDate) {
+        SaleDate = saleDate;
+    }
+
+    String SaleDate;
+
     public String getTransId() {
         return TransId;
     }

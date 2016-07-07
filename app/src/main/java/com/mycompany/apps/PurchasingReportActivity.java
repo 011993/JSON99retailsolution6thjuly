@@ -42,7 +42,7 @@ public class PurchasingReportActivity extends Activity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.PurchaseReportPurchase:
-                Intent intent = new Intent(this, ProcurementReportActivity.class);
+                Intent intent = new Intent(this, ReportTabActivityPurchasing.class);
                 startActivity(intent);
                 break;
             case R.id.PurchaseReportInvntry:
@@ -50,11 +50,11 @@ public class PurchasingReportActivity extends Activity implements View.OnClickLi
                 startActivity(in);
                 break;
             case R.id.PurchaseReportVendPaymnt:
-                Intent intent3 = new Intent(this, ReportTabActivityVendorPayment.class);
+                Intent intent3 = new Intent(this, VendorPaymentReportActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.PurchaseReportVendRetrn:
-                Intent in4 = new Intent(this, ReportVendorReturnActivity.class);
+                Intent in4 = new Intent(this, ReportTabActivityVendorReturn.class);
                 startActivity(in4);
                 break;
         }

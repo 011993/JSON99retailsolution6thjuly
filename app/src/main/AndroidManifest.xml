@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="17"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -50,9 +50,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".GoSyncActivity"
-            android:label="" />
+
         <receiver android:enabled="true"
             android:name=".BootUpReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -80,7 +78,6 @@
         <!-- android:name="android.app.searchable" -->
         <!-- android:resource="@xml/searchable" /> -->
 
-        <service android:name=".GCMIntentService" />
         <service android:name=".SyncService" />
 
         <activity
@@ -236,7 +233,8 @@
         <activity
             android:name=".PurchaseActivity"
             android:label=""
-            android:theme="@style/Theme.NoTitleBar" />
+            android:theme="@style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".Activity_Media"
             android:label="" />
@@ -255,19 +253,11 @@
             android:label=""
             android:theme="@style/Theme.NoTitleBar" />
         <activity
-            android:name=".ShowPurchaselistActivity"
-            android:label=""
-            android:theme="@style/Theme.NoTitleBar" />
-        <activity
             android:name=".Activity_lineitem_discount"
             android:label=""
             android:theme="@style/Theme.NoTitleBar" />
         <activity
             android:name=".Activity_Top_Product"
-            android:label=""
-            android:theme="@style/Theme.NoTitleBar" />
-        <activity
-            android:name=".ProcurementReportActivity"
             android:label=""
             android:theme="@style/Theme.NoTitleBar" />
         <activity
@@ -317,7 +307,8 @@
         <activity
             android:name=".activity_inventorywithpo"
             android:label=""
-            android:theme="@style/Theme.NoTitleBar" />
+            android:theme="@style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".RuleDefinationActivity"
             android:label=""
@@ -328,10 +319,6 @@
             android:theme="@style/Theme.NoTitleBar" />
         <activity
             android:name=".ActivitySalesreturn"
-            android:label=""
-            android:theme="@style/Theme.NoTitleBar" />
-        <activity
-            android:name=".GMainActivity"
             android:label=""
             android:theme="@style/Theme.NoTitleBar" />
         <activity
@@ -451,7 +438,9 @@
             android:theme="@style/Theme.NoTitleBar" />
 
         <activity android:name=".ReportTabActivityInventory"
-            android:theme="@style/Theme.NoTitleBar" />
+            android:theme="@style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustResize"
+            />
 
 
         <activity android:name=".ReportTabActivityVendorPayment"
@@ -467,12 +456,42 @@
         <activity android:name=".CustomerRejection"
             android:theme="@style/Theme.NoTitleBar" />
 
+        <activity android:name=".ShowPurchaseReportListActivity"
+        android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".ReportTabActivityPurchasing"
+            android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".ShowPurchaseReport1MonthListActivity"
+            android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".ShowPurchaseReport3MonthListActivity"
+            android:theme="@style/Theme.NoTitleBar" />
 
         <activity android:name=".VendorRejection"
             android:theme="@style/Theme.NoTitleBar" />
 
         <service android:name=".RemoteVideoService"></service>
 
+        <activity android:name=".ReportTabActivityVendorReturn"
+            android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".ReportTabActivitySalesReport"
+            android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".ReportTabActivityDirectCashPayment"
+            android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".ReportTabActivityIndirectCashPayment"
+            android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".VendorPaymentReportActivity"
+            android:theme="@style/Theme.NoTitleBar" />
+
+        <activity android:name=".ShowDailySaleListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label=""
+            android:theme="@style/Theme.NoTitleBar" />
 
     </application>
 

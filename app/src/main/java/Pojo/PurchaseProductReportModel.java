@@ -15,6 +15,16 @@ public class PurchaseProductReportModel {
     float Total;
     float GrandTotal;
 
+    public String getLastUpdate() {
+        return LastUpdate;
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        LastUpdate = lastUpdate;
+    }
+
+    String LastUpdate;
+
     public String getVendorName() {
         return VendorName;
     }

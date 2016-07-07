@@ -156,20 +156,20 @@
         android:id="@+id/linearlayout1"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:paddingTop="5dp"
         android:background="#4a4a4a"
+        android:weightSum="90.0"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
         android:gravity="center_vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
             android:background="#4a4a4a">
 
             <TextView
-                android:layout_width="200dp"
-                android:layout_height="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="ADVERTISEMENT ID"
                 android:textColor="#ffffff"
                 android:id="@+id/tvId"
@@ -177,11 +177,19 @@
                 android:textSize="14dp"
                 android:fontFamily="sans_serif"
                 android:layout_gravity="center"
-                android:gravity="center" />
+                android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
+            android:background="#4a4a4a">
 
             <TextView
-                android:layout_width="200dp"
-                android:layout_height="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="ADVERTISEMENT TEXT"
                 android:textColor="#ffffff"
                 android:id="@+id/tvText"
@@ -189,11 +197,19 @@
                 android:textSize="14dp"
                 android:fontFamily="sans_serif"
                 android:layout_gravity="center"
-                android:gravity="center" />
+                android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
+            android:background="#4a4a4a">
 
             <TextView
-                android:layout_width="200dp"
-                android:layout_height="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="AD COST SLB1"
                 android:textColor="#ffffff"
                 android:id="@+id/tvTotal"
@@ -201,9 +217,10 @@
                 android:textSize="14dp"
                 android:fontFamily="sans_serif"
                 android:layout_gravity="center"
-                android:gravity="center" />
+                android:gravity="center_vertical" />
 
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

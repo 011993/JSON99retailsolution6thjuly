@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/shilpa/99_retail_street  project/99retailsolution27june/app/build/intermediates/res/merged/debug/values-hdpi-v4/values-hdpi-v4.xml",
+        "outputFile": "/home/rspl-madhavi/AndroidStudioProjects/JSON99retailsolution6thjuly(shilpa)/app/build/intermediates/res/merged/debug/values-hdpi-v4/values-hdpi-v4.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 327
                 },
                 "from": {
-                    "file": "/home/shilpa/99_retail_street  project/99retailsolution27june/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-hdpi/values-hdpi.xml",
+                    "file": "/home/rspl-madhavi/AndroidStudioProjects/JSON99retailsolution6thjuly(shilpa)/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-hdpi/values-hdpi.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -26,7 +26,7 @@
         ]
     },
     {
-        "outputFile": "/home/rspl-rajeev/Desktop/JSON99retailsolution27june/app/build/intermediates/res/merged/debug/values-hdpi-v4/values-hdpi-v4.xml",
+        "outputFile": "/home/shilpa/99_retail_street  project/JSON99retailsolution27june(Rajeev)/app/build/intermediates/res/merged/debug/values-hdpi-v4/values-hdpi-v4.xml",
         "map": [
             {
                 "to": {
@@ -38,7 +38,7 @@
                     "endOffset": 327
                 },
                 "from": {
-                    "file": "/home/rspl-rajeev/Desktop/JSON99retailsolution27june/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-hdpi/values-hdpi.xml",
+                    "file": "/home/shilpa/99_retail_street  project/JSON99retailsolution27june(Rajeev)/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-hdpi/values-hdpi.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

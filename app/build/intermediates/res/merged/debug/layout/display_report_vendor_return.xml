@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        android:weightSum="225.0"
+        android:weightSum="250.0"
         android:layout_alignParentStart="true"
         android:textAlignment="textStart"
         android:layout_weight="10.0">
@@ -176,6 +176,25 @@
 
             <TextView
                 android:id="@+id/report_total"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Ad Id"
+                android:textColor="#000000"
+                android:textSize="14px"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingRight="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25.0"
+            android:background="#ffffff">
+
+            <TextView
+                android:id="@+id/report_days"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Ad Id"

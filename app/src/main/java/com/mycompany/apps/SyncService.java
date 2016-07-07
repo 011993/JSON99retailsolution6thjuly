@@ -1,3 +1,4 @@
+/*
 package com.mycompany.apps;
 
 
@@ -54,18 +55,22 @@ public class SyncService extends Service  {
         if( null == intent )
         {
             Log.d( "GoDBSyncService", "This is a System Restart");
-            /* restart the service with startService().
+            */
+/* restart the service with startService().
              * This will ensure that the delay between system force-stop and restart
              * is always 5 seconds
-             */
+             *//*
+
             startService(new Intent(getBaseContext(), SyncService.class));
 
         }
 
-        /*Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();*/
+        */
+/*Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();*//*
+
         loadSyncLibrary();
         syncIntent=new Intent();
-        syncIntent.putExtras(getSyncBudle());
+       // syncIntent.putExtras(getSyncBudle());
         syncInProgress = true;
         didSyncSucceed = false;
         doSync(syncIntent);
@@ -90,9 +95,11 @@ public class SyncService extends Service  {
         return null;
     }
 
-    /**
+    */
+/**
      * Load sync library.
-     */
+     *//*
+
     private void loadSyncLibrary()
     {
         try
@@ -204,8 +211,10 @@ public class SyncService extends Service  {
                 didSyncSucceed=true;
                 syncInProgress=false;
             }
-          /*  else
-                m.sendToTarget();*/
+          */
+/*  else
+                m.sendToTarget();*//*
+
         }
 
 
@@ -233,7 +242,7 @@ public class SyncService extends Service  {
         String rootPath = syncIntent.getStringExtra("dbName");
         if(rootPath==null || rootPath.lastIndexOf("/")<=0) return;
         rootPath = rootPath.substring(0, rootPath.lastIndexOf("/"));
-        extractPEMFile(getAssets(), rootPath);//extracts on every launch, you can change it to extract only if file isnt present.
+       // extractPEMFile(getAssets(), rootPath);//extracts on every launch, you can change it to extract only if file isnt present.
         clearViews();
         gNSync.startSync(gCfg);
         Log.d(TAG, "Sync Completed");
@@ -245,104 +254,4 @@ public class SyncService extends Service  {
     }
 
 
-    protected static Bundle getSyncBudle()
-    {
-        Bundle b = new Bundle();
-
-        //db name, this will be available in that package
-        //do not change this, this is the only directory where this activity can write to
-        //specifying another directory will cause the sync to fail
-
-        String dbName = "/data/data/" + GMainActivity.class.getPackage().getName() + "/sync.bdb.db";
-
-      /*
-      //if you are using encrypted SQLITE Sync agent use code below
-      //Note using this code on an unencrypted SQlite Sync agent will not work
-      //For obtaining SQLITE encrypted Sync Agent contact GoDB support
-      //start
-      String key     = "mykey";
-      //NOTE: Important, For demonstration purposes key is being hardcoded here,
-      //In production this key should not be available stored on the device
-      //or hardcoded into the application. How to handle key is outside the scope
-      //of this demo app.
-      //start SQLITE ENCRYPTION
-      String algorithm = "rc4";//RC4,AES128-OFB,AES258-OFB are currently Supported algorithms
-      boolean shouldKey = true;
-      if(Util.doesFileExist(dbName))
-      {
-         if(Util.isSqliteEncrypted(dbName))//if sqlite is already encrypted, lets rekey it
-         {
-            shouldKey = false;
-            dbName = dbName + ";rekey="+algorithm+":"+key;
-         }
-      }
-      if(shouldKey)
-         dbName = dbName + ";key="+algorithm+":"+key;//if sqlite is not yet created, or is not encrypted, lets key it
-      //end SQLITE ENCRYPTION
-       */
-        b.putString("dbName", dbName);
-        b.putString("syncServerUsername",  "1454999957");//sync user name
-        b.putString("syncServerPassword", GUtils.getSHADigest("SHA-256", "36@333"));//SHA-256 sync server password
-        //b.putString("syncServerPassword",    GUtils.getMD5Hash("mypassword"));//MD5 server password
-        b.putString("syncServerUserID",    "3");//if needed
-
-        b.putInt("syncMode",            GSyncServerConfig.SYNC_DELTA);//delta sync
-        b.putBoolean("logEnabled",           true);//logs "http.log", "sync.log", "syncstat.log" will be available in
-        //folder /data/data/getClass().getPackage().getName()
-        //after synchronization
-        b.putString("syncServerIP",       "52.76.28.14");//sync server ip/domain
-        //b.putString("syncServerIP",     "https://www.myserver.com");//sync server ip/domain if https is supported
-        //if https is supported please make sure its "https://" + servername
-
-        b.putInt("syncServerPort",           8080);//sync server http port
-        //b.putInt("syncServerPort",      443);//sync server https port if SSL is enabled
-
-        b.putString("syncServerBasePath",  "/godbss/");//sync server basepath ex: http://www.yourdomain.com/godbss/, here godbss is the basepath
-
-        //socket parameters
-        b.putInt("sockConnectTimeoutMillis", 5000);//five seconds
-        b.putInt("sockSendTimeoutMillis",  30000);//30 seconds
-        b.putInt("sockRecvTimeoutMillis",  30000);//30 seconds
-
-        //proxy parameters if needed
-        b.putBoolean("proxyEnabled",      false);
-        b.putString("httpProxy",         "192.168.0.23");//only valid if proxyEnabled is set to true
-        b.putInt("httpProxyPort",        8080);//only valid if proxyEnabled is set to true
-
-        b.putString("d4s",                 "customparam1|customval1|customparam2|customval2");//D4S
-
-        //b.putString("chunkedTableList",  "meap_order_item");//name of the table which you want to download in chunks
-        //b.putInt("maxRecChunkSize",     10);//chunk size in number of records
-
-        // b.putString("gcmProjectID",        GCM_PROJECT_ID);//only if you need GCM notifications
-
-        return b;
-    }
-
-
-
-    void extractPEMFile(AssetManager mgr, String rootPath)
-    {
-        try
-        {
-            String[] filelist = mgr.list("");
-            for(String asset: filelist)
-            {
-                if(asset.equalsIgnoreCase("ROOT.pem"))
-                {
-                    File f = new File(rootPath, "ROOT.pem");
-                    FileOutputStream os = new FileOutputStream(f);
-                    byte[] buf = new byte[200 * 1024];
-                    int n;
-                    InputStream is = mgr.open(asset);
-                    while ((n = is.read(buf)) > 0)
-                        os.write(buf, 0, n);
-                    os.close();
-                    is.close();
-                }
-            }
-        }
-        catch(Exception e)
-        {
-        }
-    }}
+    }*/

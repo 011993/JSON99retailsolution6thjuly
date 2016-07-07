@@ -32,7 +32,7 @@
         -->    <EditText
         android:layout_width="70px"
         android:layout_height="40px"
-        android:digits="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,x,y,z,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,X,Y,Z"
+        android:digits="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z"
 
         android:textColor="#000000"
         android:textSize="12px"
@@ -59,7 +59,7 @@
             android:text="mrp"
             android:textSize="12px"
             android:textColor="#000000"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:id="@+id/PurchaseproductMrp"
             android:gravity="center"
             />
@@ -68,7 +68,7 @@
             android:layout_height="40px"
             android:textSize="12px"
             android:text="Sprice"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textColor="#000000"
             android:id="@+id/purchaseselling"
             android:gravity="center"/>
@@ -77,7 +77,7 @@
             android:layout_height="40px"
             android:textSize="12px"
             android:text="Pprice"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textColor="#000000"
             android:id="@+id/purchaseprice"
             android:gravity="center"/>

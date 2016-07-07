@@ -92,9 +92,6 @@
         android:background="#4a4a4a"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="2dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
         android:weightSum="210.0">
 
         <TextView
@@ -108,7 +105,7 @@
             android:textSize="14dp"
             android:fontFamily="sans_serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:layout_width="90dp"
@@ -121,7 +118,7 @@
             android:textSize="14dp"
             android:fontFamily="sans_serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:layout_width="90dp"
@@ -134,7 +131,7 @@
             android:textSize="14dp"
             android:fontFamily="sans_serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:layout_width="90dp"
@@ -147,7 +144,7 @@
             android:textSize="14dp"
             android:fontFamily="sans_serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:layout_width="90dp"
@@ -160,7 +157,7 @@
             android:textSize="14dp"
             android:fontFamily="sans_serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center_vertical" />
 
 
         <TextView
@@ -174,7 +171,7 @@
             android:textSize="14dp"
             android:fontFamily="sans_serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:layout_width="90dp"
@@ -187,7 +184,7 @@
             android:textSize="14dp"
             android:fontFamily="sans_serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 

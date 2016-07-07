@@ -26,8 +26,8 @@ public class GoDBSyncAlarmManager extends BroadcastReceiver {
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
         wl.acquire();
         //doSync(syncIntent);
-        Intent ii = new Intent( context, SyncService.class );
-        context.startService(ii);
+       // Intent ii = new Intent( context, SyncService.class );
+       // context.startService(ii);
         wl.release();
     }
 

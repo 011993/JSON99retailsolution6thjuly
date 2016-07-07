@@ -205,11 +205,11 @@ public class FragmentProductCPGReport extends android.support.v4.app.Fragment{
                 }
                 for(ReportProductCpgModel product:arrayProductList)
                 {
-                productListAdapter.addProductToList(product);}
+                    productListAdapter.addProductToList(product);}
                 //Log.i("&&&&&&&&", "Adding " + arrayProductList.get(0) + " to Product List..");
-                    productListAdapter.setList(arrayProductList);
-                    productListAdapter.notifyDataSetChanged();
-                    autoCompleteTextView.setText("");
+                productListAdapter.setList(arrayProductList);
+                productListAdapter.notifyDataSetChanged();
+                autoCompleteTextView.setText("");
 
             }
         });

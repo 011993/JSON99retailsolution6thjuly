@@ -2,9 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#fffdd0"
+    android:background="#ff9033"
     android:padding="15dp"
-    android:weightSum="1">
+    android:weightSum="100.0">
 
     <LinearLayout
 
@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="0dp"
-        android:gravity="left"
-        android:layout_weight="0.38">
+
+       >
 
 
         <!--   <Button
@@ -40,40 +40,37 @@
                     android:hint="Please Enter LastInvoiceno"
                     android:background="@drawable/border_style"/>-->
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="0px"
-            android:layout_marginTop="10dp"
-            android:gravity="left">
-            <TextView
+            android:weightSum="1.0"
+            android:paddingTop="10dp"
 
-                android:layout_width="wrap_content"
+            >
+
+        <TextView
+
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/PaymentNumber"
                 android:textColor="#000000"
                 android:text=" Payment  Number"
-                android:fontFamily="sans-serif"
-                android:textSize="20px"
-                android:layout_marginTop="10px"
-                android:layout_marginLeft="0px"
-                android:gravity="center"
+                android:textSize="18px"
+                android:layout_weight="0.5"
 
 
                 />
             <TextView
 
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/VendorPay"
                 android:textColor="#000000"
                 android:hint="PaymentNumber"
                 android:fontFamily="sans-serif"
-                android:textSize="18px"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="230px"
-                android:gravity="left"
+                android:textSize="15px"
+                android:layout_weight="0.5"
+
                 android:background="@drawable/border_style"
                 />
         </LinearLayout>
@@ -84,29 +81,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="0px"
-            android:layout_marginTop="10px"
-            android:gravity="left">
+            android:paddingTop="5dp"
+            android:layout_weight="1.0"
+            >
             <TextView
 
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/SelectvendorOrDistributorName"
                 android:textColor="#000000"
-
+android:layout_weight="0.5"
                 android:text=" Select vendor Or Distributor Name"
-                android:fontFamily="sans-serif"
-                android:textSize="20px"
-                android:layout_marginTop="10px"
-                android:gravity="center"
+                android:textSize="18px"
+
+                android:gravity="left"
 
 
                 />
             <Spinner
-                android:layout_marginEnd="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="90px"
+
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="0.5"
                 android:id="@+id/Vendornameforindirectpayment"
                 android:background="@drawable/border_style"
                 />
@@ -118,29 +114,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="15dp"
-            android:gravity="left">
+            android:paddingTop="5dp"
+            android:layout_weight="1.0">
 
             <TextView
 
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Enterthepaymentvalue"
                 android:textColor="#000000"
                 android:text=" Select Reason of Payment"
-                android:fontFamily="sans-serif"
-                android:textSize="20px"
-                android:layout_marginTop="10px"
-                android:layout_marginLeft="0px"
-                android:gravity="center"
+                android:textSize="18px"
+
+              android:layout_weight="0.5"
 
 
                 />
             <Spinner
-                android:layout_marginEnd="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="160px"
+
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="0.5"
                 android:id="@+id/selectthereason"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/border_style"/>
@@ -152,38 +146,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="15dp"
-            android:gravity="left">
+            android:paddingTop="5dp"
+            android:weightSum="1.0"
+          >
 
             <TextView
 
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Selectpono"
                 android:textColor="#000000"
                 android:text=" Amount to Pay"
-                android:fontFamily="sans-serif"
-                android:textSize="20px"
-                android:layout_marginTop="10px"
-                android:layout_marginLeft="0px"
-                android:gravity="center"
+                android:textSize="18px"
+               android:layout_weight="0.5"
+
 
 
                 />
             <EditText
 
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/VendorPaytotal"
                 android:textColor="#000000"
-                android:maxLength="8"
+                android:maxLength="10"
                 android:inputType="numberDecimal"
                 android:hint="EnterTotal Amount"
                 android:fontFamily="sans-serif"
-                android:textSize="18px"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="260px"
-                android:gravity="left"
+                android:textSize="15px"
+              android:layout_weight="0.5"
                 android:background="@drawable/border_style"
                 />
         </LinearLayout>
@@ -193,40 +184,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="15dp"
+            android:paddingTop="55dp"
+            android:layout_marginLeft="20dp"
             android:weightSum="1.0"
             android:gravity="left">
 
             <Button
-                android:layout_marginTop="20dp"
+
                 android:layout_width="match_parent"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="70dp"
                 android:layout_height="50px"
                 android:layout_weight="0.5"
                 android:id="@+id/indirectpaybycash"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:text=" PAY BY CASH "
-                android:fontFamily="sans-serif"
                 android:onClick="view"
-                android:background="#ff3300"
-
+                android:background="#009985"
                 />
 
             <Button
 
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
+
                 android:layout_marginRight="70dp"
                 android:layout_height="50px"
                 android:id="@+id/indirectpaybycheque"
                 android:layout_weight="0.5"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:text=" PAY BY CHEQUE "
-                android:fontFamily="sans-serif"
                 android:onClick="view"
                 android:inputType="numberDecimal"
-                android:background="#ff3300"
+                android:background="#009985"
 
                 />
             <TextView

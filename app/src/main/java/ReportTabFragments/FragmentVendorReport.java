@@ -87,7 +87,7 @@ public class FragmentVendorReport extends android.support.v4.app.Fragment{
                     }
                     for(ReportVendorModel vendor:arrayVendorList)
                     {
-                    vendorListAdapter.addVendorToList(vendor);}
+                        vendorListAdapter.addVendorToList(vendor);}
                     vendorListAdapter.notifyDataSetChanged();
                     autoCompleteTextView.setText("");
                 }else if(SpinValue.equals("N"))
@@ -205,7 +205,7 @@ public class FragmentVendorReport extends android.support.v4.app.Fragment{
                 }
                 for(ReportVendorModel vendor:arrayVendorList)
                 {
-                vendorListAdapter.addVendorToList(vendor);}
+                    vendorListAdapter.addVendorToList(vendor);}
                 //Log.i("&&&&&&&&", "Adding " + arrayVendorList.get(0) + " to Product List..");
                 vendorListAdapter.notifyDataSetChanged();
                 autoCompleteTextView.setText("");

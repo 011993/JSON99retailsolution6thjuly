@@ -2,6 +2,7 @@
 
 package Adapter;
 
+       import android.app.AlertDialog;
        import android.content.Context;
         import android.text.Editable;
         import android.text.TextWatcher;
@@ -97,7 +98,7 @@ public class SalesAdapter extends ArrayAdapter<Sales>{
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ViewHolder holder;
-
+       
         if (convertView == null) {
 
             holder = new ViewHolder();
@@ -149,6 +150,10 @@ public class SalesAdapter extends ArrayAdapter<Sales>{
             holder.Quantity.removeTextChangedListener((TextWatcher) holder.Quantity.getTag());
         }
         holder.Quantity.setText(String.format("%d", salearraylist.get(position).getQuantity()));
+        if(holder.Quantity.getText().toString().trim().isEmpty()){
+
+
+        }
 
         if ((holder.StockQuant.getTag()!= null) && (holder.StockQuant.getTag() instanceof TextWatcher)){
             holder.StockQuant.removeTextChangedListener((TextWatcher) holder.StockQuant.getTag());
@@ -159,7 +164,7 @@ public class SalesAdapter extends ArrayAdapter<Sales>{
         if ((holder.conversionfactor.getTag() != null) && (holder.conversionfactor.getTag() instanceof TextWatcher)) {
             holder.conversionfactor.removeTextChangedListener((TextWatcher) holder.conversionfactor.getTag());
         }
-        DecimalFormat f=new DecimalFormat("##.0");
+        DecimalFormat f=new DecimalFormat("##.00");
         holder.conversionfactor.setText(String.format("%.2f", salearraylist.get(position).getConversionfacter()));
 
 
@@ -209,13 +214,14 @@ public class SalesAdapter extends ArrayAdapter<Sales>{
 
                         if (holder.Quantity.getText().toString().equals("")) {
                             Log.w("&&&&&&&&", "Quantity string was NULL hence returning ....");
+                            holder.Quantity.setError("not empty");
                             return;
                         }
-                        if (selling < 0) {
+                            if (selling < 0) {
                             holder.Quantity.setError("invalid");
                             return;
                         }
-                        DecimalFormat f=new DecimalFormat("##.0");
+                        DecimalFormat f=new DecimalFormat("##.00");
                         holder.Total.setText(String.valueOf(f.format(Double.parseDouble(holder.SPrice.getText().toString()) * (Double.parseDouble(holder.Quantity.getText().toString())))));
 
                         // holder.StockQuant.setText(String.valueOf(Float.parseFloat(holder.StockQuant.getText().toString()) * (Float.parseFloat(holder.conversionfactor.getText().toString()))));

@@ -1,3 +1,4 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -29,7 +30,7 @@
                 android:paddingTop="10px"
                 android:layout_weight="0.5"
                 android:text="Reason of Rejection"
-                android:textSize="14dp"
+                android:textSize="18dp"
                 android:id="@+id/vendor_reject_text1"
                 android:fontFamily="sans-serif"/>
 
@@ -37,13 +38,12 @@
             <Spinner
                 android:id="@+id/vendor_reason"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="38dp"
                 android:singleLine="true"
                 android:layout_weight="0.5"
                 android:textColor="#9B9B9B"
                 android:fontFamily="sans-serif"
                 android:inputType="textAutoComplete"
-                android:ems="10"
                 android:textSize="20px"
                 android:textColorHint="#000000"
                 android:focusable="true"
@@ -87,25 +87,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_height="50dp"
         android:layout_weight="1.0"
         >
 
 
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
             android:ems="10"
-            android:layout_weight="1.0"
-            android:layout_marginLeft="1px"
             android:background="#ffffff"
             android:textColor="#000000"
             android:hint="Enter Reason"
-            android:textSize="18px"
-            android:paddingLeft="10px"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:textSize="12dp"
+            android:singleLine="false"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/mRejectreason"/>
     </LinearLayout>
 
@@ -117,12 +117,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="94"
         android:orientation="horizontal">
+        <!--
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/VlistView"
-            android:layout_centerHorizontal="true" />
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/VlistView"
+                    android:layout_centerHorizontal="true" />
+        -->
 
 
     </LinearLayout>

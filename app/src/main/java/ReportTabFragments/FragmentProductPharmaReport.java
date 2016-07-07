@@ -88,7 +88,7 @@ public class FragmentProductPharmaReport extends android.support.v4.app.Fragment
                     }
                     for(ReportProductPharmaModel product:arrayProductList)
                     {
-                    productListAdapter.addProductToList(product);}
+                        productListAdapter.addProductToList(product);}
                     productListAdapter.notifyDataSetChanged();
                     autoCompleteTextView.setText("");
                 }else if(SpinValue.equals("N"))
@@ -211,11 +211,11 @@ public class FragmentProductPharmaReport extends android.support.v4.app.Fragment
                 }
                 for(ReportProductPharmaModel product:arrayProductList)
                 {
-                productListAdapter.addProductToList(product);}
+                    productListAdapter.addProductToList(product);}
                 //Log.i("&&&&&&&&", "Adding " + arrayProductList.get(0) + " to Product List..");
-                    productListAdapter.setList(arrayProductList);
-                    productListAdapter.notifyDataSetChanged();
-                    autoCompleteTextView.setText("");
+                productListAdapter.setList(arrayProductList);
+                productListAdapter.notifyDataSetChanged();
+                autoCompleteTextView.setText("");
 
             }
         });

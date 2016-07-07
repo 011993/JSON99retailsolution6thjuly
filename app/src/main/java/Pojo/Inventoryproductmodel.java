@@ -259,7 +259,7 @@ public class Inventoryproductmodel
     public Inventoryproductmodel() {
         Log.i("&&&&&&&&", "Constructor of PurchaseProductModel called ");
        this.productQuantity = 1;
-        this.expdate="YY/MM/DD";
+        this.expdate="2019/12/31";
 
 
     }

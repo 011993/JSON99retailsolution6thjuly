@@ -114,9 +114,9 @@ public class Activityinternetbill extends Activity {
         helper = new GDBHelper(this, dbName);
         db.execSQL("update retail_str_bill_details_internet set Status = 'Delivered' where orderid='?'");
         db.close();*/
-        Intent in = new Intent(getApplicationContext(), GMainActivity.class);
+       // Intent in = new Intent(getApplicationContext(), GMainActivity.class);
         Toast.makeText(getApplicationContext(), "Your order has been Delivered   ", Toast.LENGTH_LONG).show();
-        startActivity(in);
+      //  startActivity(in);
 
     }
 

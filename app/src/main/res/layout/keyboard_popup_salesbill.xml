@@ -139,18 +139,43 @@
             android:layout_gravity="center_vertical"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0"
+        android:paddingTop="5dp"
+
+        android:layout_marginLeft="70px"
+
+        >
     <Button
-        android:id="@+id/close"
+        android:id="@+id/paycash"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="120px"
         android:layout_height="40px"
         android:text="PayByCash"
+        android:background="#009985"
         android:textSize="12px"
 
         android:layout_marginLeft="20px"
         android:clickable="true"/>
 
+        <Button
+            android:id="@+id/close"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="120px"
+            android:layout_height="40px"
+            android:text="Close"
+            android:background="#009985"
+            android:textSize="12px"
+
+            android:layout_marginLeft="20px"
+            android:clickable="true"/>
+</LinearLayout>
     <Button
         android:id="@+id/close1"
         android:layout_marginTop="10dp"

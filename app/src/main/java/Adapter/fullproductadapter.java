@@ -6,6 +6,7 @@
         import android.app.DatePickerDialog;
         import android.content.Context;
         import android.text.Editable;
+        import android.text.InputFilter;
         import android.text.TextWatcher;
         import android.util.Log;
         import android.view.LayoutInflater;
@@ -22,9 +23,11 @@
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import com.mycompany.apps.DecimalDigitsInputFilter;
         import com.mycompany.apps.R;
         import com.mycompany.apps.activity_inventory;
 
+        import java.text.DecimalFormat;
         import java.text.ParseException;
         import java.text.SimpleDateFormat;
         import java.util.ArrayList;
@@ -100,6 +103,8 @@ public class fullproductadapter  extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final         ViewHolder holder;
+        DecimalFormat f=new DecimalFormat("##.00");
+
         if (convertView==null)
         {
             holder= new ViewHolder();
@@ -108,9 +113,15 @@ public class fullproductadapter  extends BaseAdapter {
             //  holder.PurchaseId=(TextView)convertView.findViewById(R.id.PurchaseproductId);
             holder.PurchaseName=(TextView)convertView.findViewById(R.id.PurchaseproductName);
             holder.Purchasemrp=(EditText)convertView.findViewById(R.id.PurchaseproductMrp);
+            holder.Purchasemrp.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7,2)});
+
             holder.Sellingprice=(EditText)convertView.findViewById(R.id.purchaseselling);
+            holder.Sellingprice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7,2)});
+
             holder.industry = (TextView) convertView.findViewById(R.id.inventoryindustery);
             holder.purchasingprice=(EditText)convertView.findViewById(R.id.purchaseprice);
+            holder.purchasingprice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7,2)});
+
             holder.measure=(TextView)convertView.findViewById(R.id.purchasemeasure);
             holder.EtQty =(EditText) convertView.findViewById(R.id.purchasequantity);
             holder.expdate =(EditText) convertView.findViewById(R.id.Exp_date);
@@ -119,7 +130,11 @@ public class fullproductadapter  extends BaseAdapter {
             holder.freequantity =(EditText) convertView.findViewById(R.id.discountwithoutpo);
             holder.DeleteButton=(ImageButton)convertView.findViewById(R.id.deleteButton);
             holder.Total=(TextView)convertView.findViewById(R.id.we);
+            holder.Total.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7,2)});
+
             holder.pricemargin=(TextView)convertView.findViewById(R.id.inventorymargin);
+            holder.pricemargin.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7,2)});
+
             holder.totalqty = (TextView) convertView.findViewById(R.id.totalqty);
             holder.conversion = (TextView) convertView.findViewById(R.id.inventoryconversion);
 
@@ -156,6 +171,8 @@ public class fullproductadapter  extends BaseAdapter {
 
         //     holder.PurchaseId.setText(list.get(position).getProductId());
         //   holder.industry.setText(list.get(position).getIndustry());
+
+
         if ((holder.Purchasemrp.getTag() != null) && (holder.Purchasemrp.getTag() instanceof TextWatcher)) {
             holder.Purchasemrp.removeTextChangedListener((TextWatcher) holder.Purchasemrp.getTag());
         }
@@ -184,7 +201,6 @@ public class fullproductadapter  extends BaseAdapter {
             holder.batchno.removeTextChangedListener((TextWatcher) holder.batchno.getTag());
         }
 
-
         holder.batchno.setText(list.get(position). getBatchno());
         holder.totalqty.setText(String.format("%.2f", list.get(position).getTotalqty()));
         holder.conversion.setText(String.format("%.2f", list.get(position).getConvfact()));
@@ -193,10 +209,13 @@ public class fullproductadapter  extends BaseAdapter {
         holder.measure.setText(list.get(position).getTax());
 
         holder.Total.setText(String.format("%.2f", list.get(position).getTotal()));
+        Double RetVal=((Double.parseDouble(holder.Purchasemrp.getText().toString()) - (Double.parseDouble(holder.purchasingprice.getText().toString()))) * 100) / Double.parseDouble(holder.Purchasemrp.getText().toString());
+        holder.pricemargin.setText(String.valueOf(f.format(RetVal)));
+
 
         holder.totalqty.setText(String.valueOf(((Double.parseDouble(holder.EtQty.getText().toString()) + (Double.parseDouble(holder.freequantity.getText().toString()))) * Double.parseDouble(holder.conversion.getText().toString()))));
-        holder.pricemargin.setText(String.valueOf(((Double.parseDouble(holder.Purchasemrp.getText().toString()) - (Double.parseDouble(holder.purchasingprice.getText().toString()))) * 100) / Double.parseDouble(holder.Purchasemrp.getText().toString())));
-        holder.Total.setText(String.valueOf(Double.parseDouble(holder.purchasingprice.getText().toString()) * (Double.parseDouble(holder.EtQty.getText().toString()))));
+      //  holder.pricemargin.setText(String.valueOf(((Double.parseDouble(holder.Purchasemrp.getText().toString()) - (Double.parseDouble(holder.purchasingprice.getText().toString()))) * 100) / Double.parseDouble(holder.Purchasemrp.getText().toString())));
+        holder.Total.setText((String.valueOf(f.format(Double.parseDouble(holder.purchasingprice.getText().toString()) * (Double.parseDouble(holder.EtQty.getText().toString()))))));
      //   holder.EtQty.setText(String.valueOf(Double.parseDouble(holder.EtQty.getText().toString()) * (Double.parseDouble(holder.freequantity.getText().toString()) )));
         holder.expdate.setText(list.get(position).getExpdate());
 
@@ -209,11 +228,23 @@ public class fullproductadapter  extends BaseAdapter {
         //  holder.EtQty.addTextChangedListener(new Customtextwatcher(holder.EtQty));
 
         // holder.EtQty.getText().toString();
+       /* if (holder.batchno.getText().toString().length()==0) {
+            Log.w("&&&&&&&&", "Quantity string was NULL hence returning ....");
+            holder.batchno.setError("not empty");
+
+        }*/
 
         TextWatcher quantityTextChangeWatcher = new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (holder.batchno.getText().toString().length()==0) {
+                    Log.w("&&&&&&&&", "Quantity string was NULL hence returning ....");
+                    holder.batchno.setError("not empty");
+                    return;
+
+
+                }
 
             }
 
@@ -228,7 +259,7 @@ public class fullproductadapter  extends BaseAdapter {
 
                     if (holder.EtQty.getText().toString().equals("")) {
                         Log.w("&&&&&&&&", "Quantity string was NULL hence returning ....");
-                        holder.EtQty.setError("not empty");
+                       // holder.EtQty.setError("not empty");
                         return;
 
 
@@ -236,6 +267,13 @@ public class fullproductadapter  extends BaseAdapter {
                     if (holder.freequantity.getText().toString().equals("")) {
                         Log.w("&&&&&&&&", "Quantity string was NULL hence returning ....");
                         holder.freequantity.setError("not empty");
+                        return;
+
+
+                    }
+                    if (holder.batchno.getText().toString().length()==0) {
+                        Log.w("&&&&&&&&", "Quantity string was NULL hence returning ....");
+                       // holder.batchno.setError("not empty");
                         return;
 
 
@@ -254,9 +292,12 @@ public class fullproductadapter  extends BaseAdapter {
 
                   //  holder.totalqty.setText(String.valueOf(Double.parseDouble(holder.EtQty.getText().toString())  * Double.parseDouble(holder.conversion.getText().toString())));
                     holder.totalqty.setText(String.valueOf(((Double.parseDouble(holder.EtQty.getText().toString()) + (Double.parseDouble(holder.freequantity.getText().toString()))) * Double.parseDouble(holder.conversion.getText().toString()))));        holder.pricemargin.setText(String.valueOf(((Double.parseDouble(holder.Purchasemrp.getText().toString()) - (Double.parseDouble(holder.purchasingprice.getText().toString()))) * 100) / Double.parseDouble(holder.Purchasemrp.getText().toString())));
+                    DecimalFormat f=new DecimalFormat("##.00");
+                    Double RetVal=((Double.parseDouble(holder.Purchasemrp.getText().toString()) - (Double.parseDouble(holder.purchasingprice.getText().toString()))) * 100) / Double.parseDouble(holder.Purchasemrp.getText().toString());
+                    holder.pricemargin.setText(String.valueOf(f.format(RetVal)));
 
-                    holder.pricemargin.setText(String.valueOf(((Double.parseDouble(holder.Purchasemrp.getText().toString()) - (Double.parseDouble(holder.purchasingprice.getText().toString()))) * 100) / Double.parseDouble(holder.Purchasemrp.getText().toString())));
-                    holder.Total.setText(String.valueOf(Double.parseDouble(holder.purchasingprice.getText().toString()) * (Double.parseDouble(holder.EtQty.getText().toString()))));
+                    //    holder.pricemargin.setText(String.valueOf(((Double.parseDouble(holder.Purchasemrp.getText().toString()) - (Double.parseDouble(holder.purchasingprice.getText().toString()))) * 100) / Double.parseDouble(holder.Purchasemrp.getText().toString())));
+                    holder.Total.setText((String.valueOf(f.format(Double.parseDouble(holder.purchasingprice.getText().toString()) * (Double.parseDouble(holder.EtQty.getText().toString()))))));
                     list.get(position).setProductQuantity(Integer.parseInt(holder.EtQty.getText().toString()));
                       /*  PurchaseProductModel purchaseProductModel= list.get(position);
                     holder.EtQty.setText((int) purchaseProductModel.getProductQuantity());*/
@@ -408,14 +449,16 @@ public class fullproductadapter  extends BaseAdapter {
     }
 
 
-    public void addProductToList( Inventoryproductmodel product ) {
+    public int addProductToList( Inventoryproductmodel product ) {
         Log.e("&&&&&&&&", "Adding product " + product.toString() + " to product list");
 
         Inventoryproductmodel productAlreadyInList = findProductInList(product);
         if(productAlreadyInList == null) {
-            list.add(product);
+            list.add(0,product);
+            return 0;
         } else {
             productAlreadyInList.setProductQuantity((int) (productAlreadyInList.getProductQuantity() + product.getProductQuantity()));
+                return list.indexOf(productAlreadyInList);
         }
 
     }

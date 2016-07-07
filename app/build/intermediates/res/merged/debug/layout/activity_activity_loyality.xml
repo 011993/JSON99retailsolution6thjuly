@@ -86,7 +86,7 @@
             android:orientation="horizontal"
             android:layout_weight="50.0"
             android:paddingBottom="5dp">
-
+<!--
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -95,11 +95,12 @@
             android:background="@drawable/imagebutton_layout"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/imageButton16"
+
             android:layout_weight="16.6"
             android:textSize="12px"
             android:layout_marginLeft="5dp"
             android:layout_marginEnd="5dp"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"/>-->
 
 
             <ImageButton

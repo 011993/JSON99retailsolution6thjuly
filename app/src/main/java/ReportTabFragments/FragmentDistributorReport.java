@@ -201,7 +201,7 @@ public class FragmentDistributorReport extends android.support.v4.app.Fragment{
                 }
                 for(ReportDistributorModel distributor:arrayDistributorList)
                 {
-                distributorListAdapter.addDistributorList(distributor);}
+                    distributorListAdapter.addDistributorList(distributor);}
                 distributorListAdapter.notifyDataSetChanged();
                 autoCompleteTextView.setText("");
             }

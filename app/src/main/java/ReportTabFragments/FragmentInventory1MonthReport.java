@@ -31,7 +31,7 @@ public class FragmentInventory1MonthReport extends android.support.v4.app.Fragme
     FragmentList1MonthInventoryAdapter inventoryListAdapter;
     ArrayList<InventoryReportModel> searchIdList;
     ArrayList<InventoryReportModel> Get1MonthData;
-    ArrayList<InventoryReportModel> arrayInventoryList;
+    //ArrayList<InventoryReportModel> arrayInventoryList;
    // FragmentSearch1MonthInventoryAdapter searchIdAdapter;
 
     @Override

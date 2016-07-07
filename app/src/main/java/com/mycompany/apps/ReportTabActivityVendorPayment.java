@@ -6,15 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import ReportTabFragments.TabInventoryReportPagerAdapter;
-import ReportTabFragments.TabMasterDataReportPagerAdapter;
 import ReportTabFragments.TabVendorPaymentReportPagerAdapter;
 
 /**
@@ -31,7 +27,7 @@ public class ReportTabActivityVendorPayment extends FragmentActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_activity_vendor_report);
+        setContentView(R.layout.tab_activity_vendor_payment_report);
 
         actionBar=getActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff9033")));
@@ -40,7 +36,7 @@ public class ReportTabActivityVendorPayment extends FragmentActivity implements 
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setIcon(R.drawable.w);
 
-        viewPager = (ViewPager) findViewById(R.id.pagervendor);
+        viewPager = (ViewPager) findViewById(R.id.pagervendorpayment);
         actionBar = getActionBar();
         mAdapter = new TabVendorPaymentReportPagerAdapter(getSupportFragmentManager());
 

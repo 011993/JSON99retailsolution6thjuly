@@ -9,7 +9,7 @@ public class VendorReturnModel {
     String ProductId;
     String mrp;
     float Sprice;
-    String pprice;
+    float pprice;
     String measure;
     String expdate;
     String batchno;
@@ -81,13 +81,13 @@ public class VendorReturnModel {
         }
     }
 
-    public String getPprice() {
+    public float getPprice() {
         return pprice;
     }
 
-    public void setPprice(String pprice) {
+    public void setPprice(float pprice) {
         this.pprice = pprice;
-        Total=productQuantity*Float.parseFloat(pprice);
+        Total=productQuantity*pprice;
     }
 
     public String getMeasure() {
@@ -121,7 +121,7 @@ public class VendorReturnModel {
     public void setProductQuantity(float productQuantity) {
         this.productQuantity = productQuantity;
         try {
-            Total=productQuantity*Float.parseFloat(pprice);
+            Total=productQuantity*pprice;
         } catch( Exception e) {
 
         }
@@ -133,7 +133,7 @@ public class VendorReturnModel {
 
     public void setTotal(float total) {
         Total = total;
-        Total=productQuantity*Float.parseFloat(pprice);
+        Total=productQuantity*pprice;
     }
 
     public String getBarcode() {

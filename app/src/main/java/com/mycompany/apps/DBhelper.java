@@ -193,6 +193,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 	public static final String ADENDDATE = "Ad_End_Dt";
 	public static final String STATUS = "Status";
 	public static final String COLUMN_UOM = "Uom";
+	public static final String COLUMN_LAST = "LastUpdate";
 
 	/**************************************************
 	 * retail_str_stock_master
@@ -546,6 +547,10 @@ public class DBhelper  extends SQLiteOpenHelper {
 	public static final String COLUMN_REPRT_SALE_MRP = "MRP";
 	public static final String COLUMN_REPRT_SALE_TOTAL = "Total";
 	public static final String COLUMN_REPRT_SALE_UOM = "Uom";
+
+	////////////////////////////////////////retail_str_sales_detail/////////////////////////////////////////////
+
+	public static final String COLUMN_REPRT_SALE_SDATE = "Sale_Date";
 
 	////////////////////////////////////////retail_str_sales_details_return///////////////////////////////////////////////////
 
@@ -977,11 +982,12 @@ public class DBhelper  extends SQLiteOpenHelper {
 			String[] params = new String[2];
 			params[0] = nameOrPhone + "%";
 			params[1] = nameOrPhone + "%";
-			Cursor res = db.rawQuery("select  DISTINCT Store_Id, Vend_Id, Vend_Nm,Vend_cntct_Nm,Add_1,City,Ctr_Desc,Zip,Tele,Mobile,Active from retail_store_vendor where "
+			Cursor res = db.rawQuery("select  DISTINCT Store_Id, Vend_Id, Vend_Nm,Vend_cntct_Nm,Add_1,City,Ctr_Desc,Zip,Tele,Mobile,Active,Vend_Inv from retail_store_vendor where "
 					+ " Vend_Nm like ? or  Vend_Id like ?", params);
 			if (res.moveToFirst()) {
 				do {
 					localvendor localvendor = new localvendor();
+
 					localvendor.setLocalvendorid(res.getString(res.getColumnIndex(LOCALVENDORID)));
 					localvendor.setLocalvendorname(res.getString(res.getColumnIndex(LOCALVENDORNAME)));
 					localvendor.setLocalvendoraddress(res.getString(res.getColumnIndex(LOCALVENDORADDRESS)));
@@ -992,6 +998,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 					localvendor.setLocalvendorcountry(res.getString(res.getColumnIndex(LOCALVENDORCOUNTRY)));
 					localvendor.setLocalvendorzip(res.getString(res.getColumnIndex(LOCALVENDORZIP)));
 					localvendor.setLocalactive(res.getString(res.getColumnIndex(LOCALVENDORACTIVE)));
+					localvendor.setLocalvendorinventory(res.getString(res.getColumnIndex(LOCALVENDORINVENTORY)));
 					localvendorlist.add(localvendor);
 				} while (res.moveToNext());
 			}
@@ -1449,7 +1456,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 	}
 
 	//************************!!!!!UPDATE LOCAL VENDOR!!!!!!!*****************************************
- public boolean updatelocalVendor(String LOCALVENDORID, String LOCALVENDORNAME, String LOCALVENDORCONTACT, String LOCALVENDORADDRESS,String LOCALVENDORCOUNTRY,String LOCALVENDORCITY, String LOCALVENDORMOBILE,String Spinvalue, String spinValue, String LOCALVENDORZIP, String LOCALVENDORTELE) {
+ public boolean updatelocalVendor(String LOCALVENDORID, String LOCALVENDORNAME, String LOCALVENDORCONTACT, String LOCALVENDORADDRESS,String LOCALVENDORCOUNTRY,String LOCALVENDORCITY, String LOCALVENDORMOBILE,String Spinvalue, String invspinValue, String LOCALVENDORZIP, String LOCALVENDORTELE) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();
 		contentValues.put("Vend_Id", LOCALVENDORID);
@@ -1459,7 +1466,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 		contentValues.put("City", LOCALVENDORCITY);
 		contentValues.put("Ctr_Desc", LOCALVENDORCOUNTRY);
 		contentValues.put("Mobile", LOCALVENDORMOBILE);
-		contentValues.put("Vend_Inv", LOCALVENDORINVENTORY);
+		contentValues.put("Vend_Inv",invspinValue );
 		contentValues.put("Zip", LOCALVENDORZIP);
 		contentValues.put("Active", Spinvalue);
 		contentValues.put("Tele", LOCALVENDORTELE);
@@ -1853,7 +1860,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 					+ "  Prod_Id  like ? or  Prod_Nm  like ? or BarCode like ? and Active = 'Y%'  "
 					, params);*/
 			Cursor productcursor = db.rawQuery("select distinct Prod_Id,Prod_Nm,P_Price,Selling_Order_Unit,MRP,Profit_Margin,S_Price,BarCode,Active,Conv_Fact,Ind_Nm from retail_store_prod_com where "
-							+ "  Prod_Nm  like ? or BarCode like ? and Active = 'Y%'  "
+							+ "  Prod_Nm  like ? and Active like'Y%' or BarCode like ?  "
 					, params);
 
 			if (productcursor.moveToFirst()) {
@@ -2374,8 +2381,8 @@ public class DBhelper  extends SQLiteOpenHelper {
 			String[] params = new String[1];
 			params[0] = OldInvoiceno + "%";
 
-			Cursor productcursor = db.rawQuery("select Po_No,Prod_Id,Prod_Nm,P_Price,MRP,Uom,Qty,Total,Vendor_Nm,Conv_Fact from retail_str_po_detail where "
-							+ " Po_No  like ?  "
+			Cursor productcursor = db.rawQuery("select Po_No,Prod_Id,Prod_Nm,P_Price,MRP,Uom,Qty,Total,Vendor_Nm,Conv_Fact,Flag,S_Price,Conv_Fact,Ind_Nm ,Profit_Margin from retail_str_po_detail where "
+					+ " Po_No  like ?  "
 					, params);
 			if (OldInvoiceno == null) {
 				return null;
@@ -2386,6 +2393,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 					pm.setProductId(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_PRODUCT_ID)));
 
 					////find from here i want to do wwork from here
+					pm.setProductId(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_PRODUCT_ID)));
 					pm.setProductName(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_PRODUCT_NAME)));
 					pm.setProductPrice(productcursor.getFloat(productcursor.getColumnIndex(Purchase_COLUMN_P_PRICE)));
 					pm.setVendorName(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_VENDOR_DISTRIBUTOR_NAME)));
@@ -2394,6 +2402,10 @@ public class DBhelper  extends SQLiteOpenHelper {
 					pm.setTotal(productcursor.getFloat(productcursor.getColumnIndex(Purchase_COLUMN_TOTAL)));
 					pm.setMRP(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_MRP)));
 					pm.setConversionfactor(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_Conv_Fact)));
+					pm.setIndusteryname(productcursor.getString(productcursor.getColumnIndex(PRODUCTINDUSTERY)));
+					pm.setSellingPrice(productcursor.getString(productcursor.getColumnIndex(PRODUCTSELLING)));
+					pm.setConversionfactor(productcursor.getString(productcursor.getColumnIndex(PRODUCTCONVERSION)));
+					pm.setProfit_Margin(productcursor.getString(productcursor.getColumnIndex(PRODUCTMARGIN )));
 					OldInvoiceData.add(pm);
 				} while (productcursor.moveToNext());
 			}
@@ -3118,6 +3130,11 @@ public class DBhelper  extends SQLiteOpenHelper {
 
 				ContentValues values = new ContentValues();
 				Log.e("Prodlength", String.valueOf(list.size()));
+
+				// for(int Batch=0;Batch<list.size();Batch++) {
+				fortrue = CheckbatchnoAlreadyInDBorNot(prod.getBatch_No());
+
+				float totalinventoryqty=prod.productQuantity+prod.getDiscountitems();
 				float mrp = prod.getMrp();
 				float sprice=prod.getSprice();
 				float conversin=prod.getConversion();
@@ -3129,8 +3146,6 @@ public class DBhelper  extends SQLiteOpenHelper {
 				if (newsprice < 0) {
 					newsprice = 0;
 				}
-				// for(int Batch=0;Batch<list.size();Batch++) {
-				fortrue = CheckbatchnoAlreadyInDBorNot(prod.getBatch_No());
 				if (fortrue == false) {
 					values.put("Grn_Id", grnId);
 					values.put("Vend_Nm", VendorName);
@@ -3153,18 +3168,19 @@ public class DBhelper  extends SQLiteOpenHelper {
 					values.put("Con_Mul_Qty",prod.getTotalqty());
 					values.put("Conv_MRP",newmrp);
 					values.put("Conv_SPrice",newsprice);
+					values.put("Prev_Qty",totalinventoryqty);
 
 					// Inserting Row
 					db.insert("retail_str_stock_master", null, values);
 				} else {
 					String batchqty = getparticularbatchqty(prod.getBatch_No(), prod.getProductId());
 					values.put("Grn_Id", grnId);
-					int prodQuantity = prod.productQuantity;
+					float prodQuantity = prod.getTotalqty();
 					float newStockQuantity = Float.parseFloat(batchqty) + prodQuantity;
 					if (newStockQuantity < 0) {
 						newStockQuantity = 0;
 					}
-					values.put("Qty", Double.toString(newStockQuantity));
+					values.put("Con_Mul_Qty", Double.toString(newStockQuantity));
 					int sqlUpdateRetval = db.update("retail_str_stock_master", values, "Batch_No = ?  and " +
 							"Prod_Id " +
 							" = ? ", new String[]{prod.getBatch_No(), prod.getProductId()});
@@ -3190,13 +3206,13 @@ public class DBhelper  extends SQLiteOpenHelper {
 
 	public boolean CheckbatchnoAlreadyInDBorNot(String batchno) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		String[] params = new String[1];
-		params[0] = batchno + "%";
+	/*	String[] params = new String[1];
+		params[0] = batchno + "%";*/
 		//  params[1] =productid + "%";
 
-		String Query = ("select Batch_No,Prod_Id,Qty from retail_str_stock_master where "
-				+ " Batch_No like ?");
-		Cursor cursor = db.rawQuery(Query, params);
+		String Query = ("select Batch_No,Prod_Id,Con_Mul_Qty from retail_str_stock_master where "
+				+ " Batch_No ='"+batchno+" '");
+		Cursor cursor = db.rawQuery(Query, null);
 
 		if (cursor.getCount() <= 0) {
 			cursor.close();
@@ -3204,22 +3220,16 @@ public class DBhelper  extends SQLiteOpenHelper {
 		}
 		return true;
 	}
-
-
 	public String getparticularbatchqty(String batchno, String Prod_Id) {
 		String getQty = null;
 		SQLiteDatabase db = this.getReadableDatabase();
-   /* String[] params = new String[1];
-    params[0] = batchno + "%";
-    params[1] = Prod_Id + "%";*/
-		String Query = ("select Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
-		Log.e("Query::", "select Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
+		String Query = ("select Con_Mul_Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
+		Log.e("Query::", "select Con_Mul_Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
 		Cursor cursor = db.rawQuery(Query, null);
 		if (cursor.moveToFirst()) {
-			getQty = cursor.getString(cursor.getColumnIndex(QUANTITY));
+			getQty = cursor.getString(cursor.getColumnIndex(TOTALQTY));
 		}
 		return getQty;
-
 	}
 
 	public String getparticularbatchqtyforsalesreturn(String batchno, String Prod_Nm) {
@@ -3905,7 +3915,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 					vendorReturnModel.setBatchno(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_BATCHNO)));
 					vendorReturnModel.setExpdate(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_EXP_DATE)));
 					vendorReturnModel.setMrp(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_MRP)));
-					vendorReturnModel.setPprice(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_PPRICE)));
+					vendorReturnModel.setPprice(NumberCursor.getFloat(NumberCursor.getColumnIndex(COLUMN_STOCK_PPRICE)));
 					vendorReturnModel.setSprice(NumberCursor.getFloat(NumberCursor.getColumnIndex(COLUMN_STOCK_SPRICE)));
 					vendorReturnModel.setUOM(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_UOM)));
 					vendorReturnModel.setStock(NumberCursor.getFloat(NumberCursor.getColumnIndex(COLUMN_STOCK_QTY)));
@@ -3937,7 +3947,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 					vendorReturnModel.setBatchno(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_BATCHNO)));
 					vendorReturnModel.setExpdate(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_EXP_DATE)));
 					vendorReturnModel.setMrp(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_MRP)));
-					vendorReturnModel.setPprice(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_PPRICE)));
+					vendorReturnModel.setPprice(NumberCursor.getFloat(NumberCursor.getColumnIndex(COLUMN_STOCK_PPRICE)));
 					vendorReturnModel.setSprice(NumberCursor.getFloat(NumberCursor.getColumnIndex(COLUMN_STOCK_SPRICE)));
 					vendorReturnModel.setUOM(NumberCursor.getString(NumberCursor.getColumnIndex(COLUMN_STOCK_UOM)));
 					vendorReturnModel.setStock(NumberCursor.getFloat(NumberCursor.getColumnIndex(COLUMN_STOCK_QTY)));
@@ -4164,9 +4174,17 @@ public class DBhelper  extends SQLiteOpenHelper {
 	}
 
 
-	public boolean updatelocalVendorinpurchase(String LOCALVENDORID, String LOCALVENDORACTIVE) {
+	public boolean updatelocalVendorinpurchase(String LOCALVENDORID,String LOCALVENDORNAME,String LOCALVENDORADDRESS,String LOCALVENDORCITY,String LOCALVENDORCOUNTRY,String LOCALVENDORZIP,String Invspinvalue, String LOCALVENDORACTIVE) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();
+
+
+		contentValues.put("Vend_Dstr_Nm", LOCALVENDORNAME);
+		contentValues.put("Vend_Dstr_Add",LOCALVENDORADDRESS);
+		contentValues.put("Vend_Dstr_City",LOCALVENDORCITY);
+		contentValues.put("Vend_Dstr_Ctr",LOCALVENDORCOUNTRY);
+		contentValues.put("Vend_Dstr_Zip",LOCALVENDORZIP);
+		contentValues.put("Vend_Dstr_Inv",Invspinvalue);
 		contentValues.put("Active", LOCALVENDORACTIVE);
 		int SqlValue = db.update("retail_vend_dstr", contentValues, "Vend_Dstr_Id = ? ", new String[]{String.valueOf(LOCALVENDORID)});
 		Log.e("Update for LocalVendor", LOCALVENDORACTIVE);
@@ -4514,20 +4532,20 @@ public class DBhelper  extends SQLiteOpenHelper {
 		return vendorlist;
 	}
 
-	ArrayList<String> getVendorNameprocurement(String name) {
-		ArrayList<String> vendornamelist = new ArrayList<String>();
+	public ArrayList<VendorReportModel> getVendorNameprocurement(String name) {
+		ArrayList<VendorReportModel> vendornamelist = new ArrayList<VendorReportModel>();
 		try {
 			SQLiteDatabase db = this.getReadableDatabase();
 			String[] params = new String[1];
 			params[0] = name + "%";
 			Cursor cursor = db.rawQuery("select distinct Vendor_Nm from retail_str_po_detail  where"
-							+ " Vendor_Nm like ?  "
+					+ " Vendor_Nm like ?  "
 					, params);
 			if (cursor.moveToFirst()) {
 				do {
-
-					vendornamelist.add(cursor.getString(cursor.getColumnIndex(COLUMN_MASTER_VENDOR_NAME)));
-
+					VendorReportModel vm = new VendorReportModel();
+					vm.setVendor_Nm(cursor.getString(cursor.getColumnIndex(COLUMN_MASTER_VENDOR_NAME)));
+					vendornamelist.add(vm);
 				} while (cursor.moveToNext());
 			}
 
@@ -4569,7 +4587,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 //////////////////////////////////////////////// get DATA From year and Month For Purchase REPORT//////////////////////////////////////////////////////////
 
 
-	public ArrayList<VendorReportModel> Demo(String Value1, String Value2) {
+	public ArrayList<VendorReportModel> PurchaseDataForMonth(String Value1, String Value2) {
 		ArrayList<VendorReportModel> OldInvoiceData = new ArrayList<VendorReportModel>();
 		try {
 			SQLiteDatabase db = this.getReadableDatabase();
@@ -4598,7 +4616,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String[] params = new String[1];
 		params[0] = Value + "%";
-		Cursor cursor = db.rawQuery("select Prod_Nm,P_Price,Qty,Total,Uom from retail_str_po_detail where "
+		Cursor cursor = db.rawQuery("select Prod_Nm,P_Price,Qty,Total,Uom,LastUpdate from retail_str_po_detail where "
 						+ "  Po_No like ? "
 				, params);
 		if (cursor.moveToFirst()) {
@@ -4608,6 +4626,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 				pm.setProductPrice(cursor.getFloat(cursor.getColumnIndex(P_PRICE)));
 				pm.setTotal(cursor.getFloat(cursor.getColumnIndex(COLUMN_TOTAL)));
 				pm.setUom(cursor.getString(cursor.getColumnIndex(COLUMN_UOM)));
+				pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_LAST)));
 				pm.setProductQuantity(cursor.getFloat(cursor.getColumnIndex(COLUMN_QTY)));
 				getpurchaselist.add(pm);
 
@@ -4705,7 +4724,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 			params[2] = idorName + "%";
 			//params[3] = idorName + "%";
 			Cursor productcursor = db.rawQuery("select distinct Prod_Id,Prod_Nm,P_Price,S_Price,Selling_Order_Unit,Profit_Margin,MRP,S_Price,BarCode,Conv_Fact,Ind_Nm from retail_store_prod_com where "
-							+ " Prod_Id  like ? or  Prod_Nm  like ? or BarCode like ? And Active = 'Y%' "
+							+ " Prod_Id  like ? or  Prod_Nm  like ? And Active like 'Y%'  or BarCode like ? "
 					, params);
 
 			if (productcursor.moveToFirst()) {
@@ -5165,7 +5184,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 		params[0] = batchno + "%";*/
 		//  params[1] =productid + "%";
 
-		String Query = ("select Batch_No,Qty from retail_str_stock_master where "
+		String Query = ("select Batch_No,Con_Mul_Qty from retail_str_stock_master where "
 				+ " Batch_No ='" + batchno + "'");
 		Cursor cursor = db.rawQuery(Query, null);
 
@@ -5177,19 +5196,19 @@ public class DBhelper  extends SQLiteOpenHelper {
 	}
 
 
-	public String getparticularbatchqtyforinvoice(String batchno, String Prod_Id) {
+	public String getparticularbatchqtyforinvoice(String batchno, String Prod_Nm) {
 		String getQty = null;
 		SQLiteDatabase db = this.getReadableDatabase();
-		String[] params = new String[2];
-		params[0] = batchno + "%";
-		params[1] = Prod_Id + "%";
-		String Query = ("select Qty from retail_str_stock_master where " + " Batch_No like ? and Prod_Id like ? ");
+//    String[] params = new String[2];
+//    params[0] = batchno + "%";
+//    params[1] = Prod_Id + "%";
+		String Query = ("select Con_Mul_Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Nm = '" + Prod_Nm + "'");
 		//Log.e("Query::", "select Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Nm = '" + Prod_Nm + "'");
-		Cursor cursor = db.rawQuery(Query, params);
+		Cursor cursor = db.rawQuery(Query, null);
 		if (cursor.moveToFirst()) {
-			getQty = cursor.getString(cursor.getColumnIndex(QUANTITY));
+			getQty=cursor.getString(cursor.getColumnIndex(TOTALQTY));
 		}
-		return getQty;
+		return  getQty;
 
 	}
 
@@ -5455,7 +5474,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 
 	////////////////////////////////////////////get vendorReturnId from retail_str_vendor_detail_return//////////////////////////////
 
-	ArrayList<ReportVendorReturnModel> getVendorReturnId(String id) {
+	public ArrayList<ReportVendorReturnModel> getVendorReturnId(String id) {
 		ArrayList<ReportVendorReturnModel> ReturnId = new ArrayList<ReportVendorReturnModel>();
 		try {
 			SQLiteDatabase db = this.getReadableDatabase();
@@ -5607,7 +5626,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 			params[1] = idorName + "%";
 			params[2] = idorName + "%";
 			Cursor productcursor = db.rawQuery("select distinct Prod_Id,Prod_Nm,P_Price,S_Price,Selling_Order_Unit,Profit_Margin, MRP ,S_Price, BarCode,Conv_Fact,Ind_Nm from retail_store_prod_com where "
-							+ " Prod_Id  like ? or  Prod_Nm  like ? or BarCode like  ? AND Active = 'Y%'  "
+							+ " Prod_Id  like ? or  Prod_Nm  like ?  AND Active like 'Y%' or BarCode like  ?  "
 					, params);
 
 			if (productcursor.moveToFirst()) {
@@ -5651,6 +5670,8 @@ public class DBhelper  extends SQLiteOpenHelper {
 				PersistenceManager.getStoreId(mycontext);
 
 				Log.e("Prodlength", String.valueOf(list.size()));
+				float totalinventoryqty=prod.productQuantity+prod.getFreequantity();
+
 				float mrp = prod.getMrp();
 				float sprice=prod.getSprice();
 				float conversin=prod.getConvfact();
@@ -5686,10 +5707,8 @@ public class DBhelper  extends SQLiteOpenHelper {
 					values.put("Conv_Fact", prod.getConvfact());
 					values.put("Free_Goods", prod.getFreequantity());
 					values.put("Con_Mul_Qty",prod.getTotalqty());
-
-
+					values.put("Prev_Qty",totalinventoryqty);
 					values.put("Conv_MRP",newmrp);
-
 					values.put("Conv_SPrice",newsprice);
 					// Inserting Row
 					db.insert("retail_str_stock_master", null, values);
@@ -5697,12 +5716,12 @@ public class DBhelper  extends SQLiteOpenHelper {
 
 					String batchqty = getparticularbatchqtywithoutpo(prod.getBatchno(), prod.getProductId());
 					values.put("Grn_Id", grnId);
-					int prodQuantity = prod.productQuantity;
+					float prodQuantity = prod.getTotalqty();
 					float newStockQuantity = Float.parseFloat(batchqty) + prodQuantity;
 					if (newStockQuantity < 0) {
 						newStockQuantity = 0;
 					}
-					values.put("Qty", Double.toString(newStockQuantity));
+					values.put("Con_Mul_Qty", Double.toString(newStockQuantity));
 					int sqlUpdateRetval = db.update("retail_str_stock_master", values, "Batch_No = ?  and " + "Prod_Id " +
 							" = ? ", new String[]{prod.getBatchno(), prod.getProductId()});
 
@@ -5732,7 +5751,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 		params[0] = batchno + "%";
 		//  params[1] =productid + "%";
 
-		String Query = ("select Batch_No,Prod_Id,Qty from retail_str_stock_master where "
+		String Query = ("select Batch_No,Prod_Id,Con_Mul_Qty from retail_str_stock_master where "
 				+ " Batch_No like ?");
 		Cursor cursor = db.rawQuery(Query, params);
 
@@ -5750,11 +5769,11 @@ public class DBhelper  extends SQLiteOpenHelper {
   /* String[] params = new String[1];
    params[0] = batchno + "%";
    params[1] = Prod_Id + "%";*/
-		String Query = ("select Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
-		Log.e("Query::", "select Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
+		String Query = ("select Con_Mul_Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
+		Log.e("Query::", "select Con_Mul_Qty from retail_str_stock_master where " + " Batch_No =  '" + batchno + "' and Prod_Id = '" + Prod_Id + "'");
 		Cursor cursor = db.rawQuery(Query, null);
 		if (cursor.moveToFirst()) {
-			getQty = cursor.getString(cursor.getColumnIndex(QUANTITY));
+			getQty = cursor.getString(cursor.getColumnIndex(TOTALQTY));
 		}
 		return getQty;
 
@@ -6241,27 +6260,29 @@ public class DBhelper  extends SQLiteOpenHelper {
 		return transidlist;
 	}
 
-//////////////////////////////////////////////// get DATA From year and Month For Sale REPORT//////////////////////////////////////////////////////////
-
-	public ArrayList<SaleReportModel> SaleData(String Value3, String Value4) {
-		ArrayList<SaleReportModel> OldInvoiceData = new ArrayList<SaleReportModel>();
+public ArrayList<SaleReportModel> SaleData(String Value1, String Value2) {
+		ArrayList<SaleReportModel> purchaseData = new ArrayList<SaleReportModel>();
 		try {
 			SQLiteDatabase db = this.getReadableDatabase();
-			Cursor productcursor = db.rawQuery("select distinct Total,Uom from retail_str_sales_detail where "
-					+ " LastUpDate between '" + Value3 + "' AND '" + Value4 + "'", null);
+			Cursor productcursor = db.rawQuery("select distinct Tri_Id,Total,Uom,Prod_Nm,Batch_No from retail_str_sales_detail where "
+					+ " LastUpdate between '" + Value1 + "' AND '" + Value2 + "'", null);
 			if (productcursor.moveToFirst()) {
 				do {
 					SaleReportModel vm = new SaleReportModel();
+					vm.setTransId(productcursor.getString(productcursor.getColumnIndex(COLUMN_REPRT_SALE_ID)));
 					vm.setGrnTotl(productcursor.getString(productcursor.getColumnIndex(COLUMN_REPRT_SALE_TOTAL)));
 					vm.setUom(productcursor.getString(productcursor.getColumnIndex(COLUMN_REPRT_SALE_UOM)));
-					OldInvoiceData.add(vm);
+					vm.setProdNm(productcursor.getString(productcursor.getColumnIndex(COLUMN_REPRT_SALE_NM)));
+					vm.setBatch(productcursor.getString(productcursor.getColumnIndex(COLUMN_REPRT_SALE_NO)));
+					purchaseData.add(vm);
 				} while (productcursor.moveToNext());
 			}
 		} catch (IndexOutOfBoundsException cur) {
 			cur.printStackTrace();
 		}
-		return OldInvoiceData;
+		return purchaseData;
 	}
+
 
 	////////////////////////////////////////////////////get all data from retail_str_sales_detail ////////////////////////////////////////////////////////////////////////////
 
@@ -6270,16 +6291,16 @@ public class DBhelper  extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String[] params = new String[1];
 		params[0] = Value + "%";
-		Cursor cursor = db.rawQuery("select Prod_Nm,Batch_No,Exp_Date,S_Price,Qty,MRP from retail_str_sales_detail where "
-				+ "  Total like ? "
+		Cursor cursor = db.rawQuery("select Exp_Date,S_Price,Qty,MRP from retail_str_sales_detail where "
+						+ "  Tri_Id like ? "
 				, params);
+
 		if (cursor.moveToFirst()) {
 			do {
 				SaleReportModel pm = new SaleReportModel();
-				pm.setProdNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_NM)));
-				pm.setBatch(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_NO)));
 				pm.setExp(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_DATE)));
 				pm.setPrice(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_PRICE)));
+				//pm.setSaleDate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_SDATE)));
 				pm.setQty(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_QTY)));
 				pm.setMrp(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_MRP)));
 				getpurchaselist.add(pm);
@@ -6288,6 +6309,32 @@ public class DBhelper  extends SQLiteOpenHelper {
 		}
 		return getpurchaselist;
 	}
+
+
+	////////////////////////////////////////////////////////get all data from retail str sales master//////////////
+
+	public ArrayList<SaleReportModel> getSalesDate(String salesDate) {
+		ArrayList<SaleReportModel> getpurchaselist1 = new ArrayList<SaleReportModel>();
+		SQLiteDatabase db = this.getReadableDatabase();
+		String[] params = new String[1];
+		params[0] = salesDate + "%";
+		Cursor cursor = db.rawQuery("select Sale_Date from retail_str_sales_master where "
+						+ "  Tri_Id like ? "
+				, params);
+
+		if (cursor.moveToFirst()) {
+			do {
+				SaleReportModel pm = new SaleReportModel();
+				pm.setSaleDate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_SDATE)));
+				getpurchaselist1.add(pm);
+
+			} while (cursor.moveToNext());
+		}
+		return getpurchaselist1;
+	}
+
+
+
 
 	////////////////////////////////////////////////DATA FROM  retail_str_sales_detail TABLE//////////////////////////////////////
 
@@ -6567,9 +6614,9 @@ public class DBhelper  extends SQLiteOpenHelper {
 			SQLiteDatabase db = this.getReadableDatabase();
 			String[] params = new String[1];
 			params[0] = spinnervalue + "%";
-
-			Cursor productcursor = db.rawQuery("select Po_No,Prod_Id,Prod_Nm,P_Price,MRP,Uom,Qty,Total,Vendor_Nm,Conv_Fact,Flag from retail_str_po_detail_hold where "
-							+ " Po_No  like ?  "
+		//distinct Prod_Id,Prod_Nm,P_Price,Selling_Order_Unit,MRP,Profit_Margin,S_Price,BarCode,Active,Conv_Fact,Ind_Nm
+			Cursor productcursor = db.rawQuery("select Po_No,Prod_Id,Prod_Nm,P_Price,MRP,Uom,Qty,Total,Vendor_Nm,Conv_Fact,Flag,S_Price,Conv_Fact,Ind_Nm from retail_str_po_detail_hold where "
+					+ " Po_No  like ?  "
 					, params);
 			if (spinnervalue == null) {
 				return null;
@@ -6586,6 +6633,21 @@ public class DBhelper  extends SQLiteOpenHelper {
 					pm.setTotal(productcursor.getFloat(productcursor.getColumnIndex(Purchase_COLUMN_TOTAL)));
 					pm.setMRP(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_MRP)));
 					pm.setConversionfactor(productcursor.getString(productcursor.getColumnIndex(Purchase_COLUMN_Conv_Fact)));
+					pm.setIndusteryname(productcursor.getString(productcursor.getColumnIndex(PRODUCTINDUSTERY)));
+					pm.setSellingPrice(productcursor.getString(productcursor.getColumnIndex(PRODUCTSELLING)));
+					pm.setConversionfactor(productcursor.getString(productcursor.getColumnIndex(PRODUCTCONVERSION)));
+
+					//pm.setProductId(productcursor.getString(productcursor.getColumnIndex(PRODUCTPRODUCTID)));
+					/*pm.setProductName(productcursor.getString(productcursor.getColumnIndex(PRODUCTNAME)));
+					pm.setProductPrice(productcursor.getFloat(productcursor.getColumnIndex(PRODUCTPURCHASE)));
+					pm.setUom(productcursor.getString(productcursor.getColumnIndex(PRODUCTMEASUREUNITINV)));
+					pm.setSellingPrice(productcursor.getString(productcursor.getColumnIndex(PRODUCTSELLING)));
+					pm.setMRP(productcursor.getString(productcursor.getColumnIndex(PRODUCTMRP)));
+					pm.setBarcode(productcursor.getString(productcursor.getColumnIndex(PRODUCTBARCODE)));
+					pm.setProfit_Margin(productcursor.getString(productcursor.getColumnIndex(PRODUCTMARGIN)));
+
+				pm.setIndusteryname(productcursor.getString(productcursor.getColumnIndex(PRODUCTINDUSTERY)));*/
+
 					OldInvoiceData.add(pm);
 				} while (productcursor.moveToNext());
 			}
@@ -7543,6 +7605,482 @@ public ArrayList<String> getBillLevel() {
 		return distributorlist;
 	}
 
+	public ArrayList<VendorReportModel> getPurchasing1MonthDataForReport() {
+
+		ArrayList<VendorReportModel> vendorlist = new ArrayList<VendorReportModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+      /*String[] params = new String[1];
+      params[0] = PoNo + "%";*/
+			Cursor cursor = db.rawQuery("select distinct Po_No,Vendor_Nm,Total from retail_str_po_detail  "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					VendorReportModel vm = new VendorReportModel();
+					vm.setPo_No(cursor.getString(cursor.getColumnIndex(COLUMN_MASTER_PO_NO)));
+					vm.setVendor_Nm(cursor.getString(cursor.getColumnIndex(COLUMN_MASTER_VENDOR_NAME)));
+					vm.setTotal(cursor.getString(cursor.getColumnIndex(COLUMN_TOTAL)));
+					vendorlist.add(vm);
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		}
+
+		return vendorlist;
+	}
+
+
+
+	public ArrayList<VendorReportModel> getPurchasing3MonthDataForReport() {
+
+		ArrayList<VendorReportModel> vendorlist = new ArrayList<VendorReportModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+      /*String[] params = new String[1];
+      params[0] = PoNo + "%";*/
+			Cursor cursor = db.rawQuery("select distinct Po_No,Vendor_Nm,Total from retail_str_po_detail "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					VendorReportModel vm = new VendorReportModel();
+					vm.setPo_No(cursor.getString(cursor.getColumnIndex(COLUMN_MASTER_PO_NO)));
+					vm.setVendor_Nm(cursor.getString(cursor.getColumnIndex(COLUMN_MASTER_VENDOR_NAME)));
+					vm.setTotal(cursor.getString(cursor.getColumnIndex(COLUMN_TOTAL)));
+					vendorlist.add(vm);
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		}
+
+		return vendorlist;
+	}
+
+/////////////////////////////////////get DATA From year and Month For VendorReturnReport REPORT///////////////////////////////
+
+	public ArrayList<ReportVendorReturnModel> VendorReturnReportDataForMonth(String Value1, String Value2) {
+		ArrayList<ReportVendorReturnModel> purchaseData = new ArrayList<ReportVendorReturnModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+			Cursor cursor = db.rawQuery("select distinct Vendor_Nm,Prod_Nm,Batch_No,Exp_Date,Reason_Of_Return,Qty,P_Price,Total,Uom from retail_str_vendor_detail_return where "
+					+ " LastUpdate between '" + Value1 + "' AND '" + Value2 + "'", null);
+			if (cursor.moveToFirst()) {
+				do {
+					ReportVendorReturnModel pm = new ReportVendorReturnModel();
+					pm.setVendrNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTVENDR_NM)));
+					pm.setProdctNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTPROD_NM)));
+					pm.setBatchNo(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTBATCH_NO)));
+					pm.setExpDate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTEXP_DATE)));
+					pm.setReason(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTREASON_RETRN)));
+					pm.setQty(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_QTY)));
+					pm.setPPrice(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTP_Price)));
+					pm.setTotal(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_TOTAL)));
+					pm.setUom(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_UOM)));
+					purchaseData.add(pm);
+				} while (cursor.moveToNext());
+			}
+		} catch (IndexOutOfBoundsException cur) {
+			cur.printStackTrace();
+		}
+		return purchaseData;
+	}
+
+	public ArrayList<ReportVendorReturnModel> getVendorReturn1MonthDataForReport() {
+		ArrayList<ReportVendorReturnModel> distributorlist = new ArrayList<ReportVendorReturnModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vendor_Nm,Prod_Nm,Batch_No,Exp_Date,Reason_Of_Return,Qty,P_Price,Total,Uom from retail_str_vendor_detail_return "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					ReportVendorReturnModel pm = new ReportVendorReturnModel();
+					pm.setVendrNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTVENDR_NM)));
+					pm.setProdctNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTPROD_NM)));
+					pm.setBatchNo(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTBATCH_NO)));
+					pm.setExpDate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTEXP_DATE)));
+					pm.setReason(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTREASON_RETRN)));
+					pm.setQty(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_QTY)));
+					pm.setPPrice(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTP_Price)));
+					pm.setTotal(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_TOTAL)));
+					pm.setUom(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_UOM)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+	public ArrayList<ReportVendorReturnModel> getVendorReturn3MonthDataForReport() {
+		ArrayList<ReportVendorReturnModel> distributorlist = new ArrayList<ReportVendorReturnModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vendor_Nm,Prod_Nm,Batch_No,Exp_Date,Reason_Of_Return,Qty,P_Price,Total,Uom from retail_str_vendor_detail_return "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					ReportVendorReturnModel pm = new ReportVendorReturnModel();
+					pm.setVendrNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTVENDR_NM)));
+					pm.setProdctNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTPROD_NM)));
+					pm.setBatchNo(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTBATCH_NO)));
+					pm.setExpDate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTEXP_DATE)));
+					pm.setReason(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTREASON_RETRN)));
+					pm.setQty(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_QTY)));
+					pm.setPPrice(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTP_Price)));
+					pm.setTotal(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_TOTAL)));
+					pm.setUom(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_UOM)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+	public ArrayList<ReportVendorReturnModel> getVendorReturn6MonthDataForReport() {
+		ArrayList<ReportVendorReturnModel> distributorlist = new ArrayList<ReportVendorReturnModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vendor_Nm,Prod_Nm,Batch_No,Exp_Date,Reason_Of_Return,Qty,P_Price,Total,Uom from retail_str_vendor_detail_return "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					ReportVendorReturnModel pm = new ReportVendorReturnModel();
+					pm.setVendrNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTVENDR_NM)));
+					pm.setProdctNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTPROD_NM)));
+					pm.setBatchNo(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTBATCH_NO)));
+					pm.setExpDate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTEXP_DATE)));
+					pm.setReason(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTREASON_RETRN)));
+					pm.setQty(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_QTY)));
+					pm.setPPrice(cursor.getString(cursor.getColumnIndex(COLUMN_REPRTP_Price)));
+					pm.setTotal(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_TOTAL)));
+					pm.setUom(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_UOM)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+
+	public ArrayList<SaleReportModel> getDailySalesReport() {
+		ArrayList<SaleReportModel> idlist = new ArrayList<SaleReportModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Tri_Id,Total,Uom,Prod_Nm,Batch_No from retail_str_sales_detail "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					SaleReportModel sm = new SaleReportModel();
+					sm.setTransId(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_ID)));
+					sm.setGrnTotl(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_TOTAL)));
+					sm.setUom(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_UOM)));
+					sm.setProdNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_NM)));
+					sm.setBatch(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_SALE_NO)));
+					idlist.add(sm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return idlist;
+	}
+
+
+	public ArrayList<IndirectVendorPaymentModel> getIndirectCash1MonthDataForReport() {
+		ArrayList<IndirectVendorPaymentModel> distributorlist = new ArrayList<IndirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,Reason_Of_Pay,LastUpdate from tmp_vend_dstr_payment "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					IndirectVendorPaymentModel pm = new IndirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setReasonOfPay(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_REASN_OF_PAY)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+
+	public ArrayList<IndirectVendorPaymentModel> getIndirectCash3MonthDataForReport() {
+		ArrayList<IndirectVendorPaymentModel> distributorlist = new ArrayList<IndirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,Reason_Of_Pay,LastUpdate from tmp_vend_dstr_payment "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					IndirectVendorPaymentModel pm = new IndirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setReasonOfPay(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_REASN_OF_PAY)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+	public ArrayList<IndirectVendorPaymentModel> getIndirectCash6MonthDataForReport() {
+		ArrayList<IndirectVendorPaymentModel> distributorlist = new ArrayList<IndirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,Reason_Of_Pay,LastUpdate from tmp_vend_dstr_payment "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					IndirectVendorPaymentModel pm = new IndirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setReasonOfPay(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_REASN_OF_PAY)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+
+	public ArrayList<DirectVendorPaymentModel> getDirectCash1MonthDataForReport() {
+		ArrayList<DirectVendorPaymentModel> distributorlist = new ArrayList<DirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,LastUpdate from tmp_vend_dstr_payment "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					DirectVendorPaymentModel pm = new DirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+
+	public ArrayList<DirectVendorPaymentModel> getDirectCash3MonthDataForReport() {
+		ArrayList<DirectVendorPaymentModel> distributorlist = new ArrayList<DirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,LastUpdate from tmp_vend_dstr_payment "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					DirectVendorPaymentModel pm = new DirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+
+	public ArrayList<DirectVendorPaymentModel> getDirectCash6MonthDataForReport() {
+		ArrayList<DirectVendorPaymentModel> distributorlist = new ArrayList<DirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,LastUpdate from tmp_vend_dstr_payment "
+					, null);
+			if (cursor.moveToFirst()) {
+				do {
+					DirectVendorPaymentModel pm = new DirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					distributorlist.add(pm);
+
+				} while (cursor.moveToNext());
+			}
+
+		} catch (IndexOutOfBoundsException ex) {
+			ex.printStackTrace();
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
+
+		return distributorlist;
+	}
+
+
+	/////////////////////////////////////get DATA From year and Month For IndirectPayByChequeReport REPORT///////////////////////////////
+
+	public ArrayList<IndirectVendorPaymentModel> IndirectPayByChequeReportDataForMonth(String Value1, String Value2) {
+		ArrayList<IndirectVendorPaymentModel> purchaseData = new ArrayList<IndirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,Bank_Name,Cheque_No,Reason_Of_Pay,LastUpdate from tmp_vend_dstr_payment where "
+					+ " LastUpdate between '" + Value1 + "' AND '" + Value2 + "'", null);
+			if (cursor.moveToFirst()) {
+				do {
+					IndirectVendorPaymentModel pm = new IndirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setBankName(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_BANK_NM)));
+					pm.setChequeNo(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_CHEQUE_NO)));
+					pm.setReasonOfPay(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_REASN_OF_PAY)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					purchaseData.add(pm);
+				} while (cursor.moveToNext());
+			}
+		} catch (IndexOutOfBoundsException cur) {
+			cur.printStackTrace();
+		}
+		return purchaseData;
+	}
+
+
+	/////////////////////////////////////get DATA From year and Month For DirectPayByCashReport REPORT///////////////////////////////
+
+	public ArrayList<DirectVendorPaymentModel> DirectPayByCashReportDataForMonth(String Value1, String Value2) {
+		ArrayList<DirectVendorPaymentModel> purchaseData = new ArrayList<DirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,LastUpdate from tmp_vend_dstr_payment where "
+					+ " LastUpdate between '" + Value1 + "' AND '" + Value2 + "'", null);
+			if (cursor.moveToFirst()) {
+				do {
+					DirectVendorPaymentModel pm = new DirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					purchaseData.add(pm);
+				} while (cursor.moveToNext());
+			}
+		} catch (IndexOutOfBoundsException cur) {
+			cur.printStackTrace();
+		}
+		return purchaseData;
+	}
+
+
+	/////////////////////////////////////get DATA From year and Month For DirectPayByChequeReport REPORT///////////////////////////////
+
+	public ArrayList<DirectVendorPaymentModel> DirectPayByChequeReportDataForMonth(String Value1, String Value2) {
+		ArrayList<DirectVendorPaymentModel> purchaseData = new ArrayList<DirectVendorPaymentModel>();
+		try {
+			SQLiteDatabase db = this.getReadableDatabase();
+			Cursor cursor = db.rawQuery("select distinct Vend_Dstr_Nm,Amount,Received_Amount,Due_Amount,Bank_Name,Cheque_No,LastUpdate from tmp_vend_dstr_payment where "
+					+ " LastUpdate between '" + Value1 + "' AND '" + Value2 + "'", null);
+			if (cursor.moveToFirst()) {
+				do {
+					DirectVendorPaymentModel pm = new DirectVendorPaymentModel();
+					pm.setVendorNm(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_VENDDSTR_NM)));
+					pm.setAmountPaid(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_PAID_AMNT)));
+					pm.setAmountRcvd(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_RCVD_AMNT)));
+					pm.setAmountDue(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_DUE_AMNT)));
+					pm.setBankName(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_BANK_NM)));
+					pm.setChequeNo(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_CHEQUE_NO)));
+					pm.setLastUpdate(cursor.getString(cursor.getColumnIndex(COLUMN_REPRT_LAST_UPDTE)));
+					purchaseData.add(pm);
+				} while (cursor.moveToNext());
+			}
+		} catch (IndexOutOfBoundsException cur) {
+			cur.printStackTrace();
+		}
+		return purchaseData;
+	}
 
 
 }

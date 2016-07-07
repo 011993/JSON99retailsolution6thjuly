@@ -29,13 +29,12 @@
 
                 <TextView
 
-                    android:layout_width="130px"
+                    android:layout_width="110px"
                     android:layout_height="36px"
                     android:inputType="number"
                     android:textColor="#000000"
                     android:paddingTop="5dp"
                     android:text="Invoice No"
-                    android:fontFamily="sans-serif"
                     android:ems="10"
                     android:id="@+id/tv_invoiceno"
                     android:textSize="20px"
@@ -43,7 +42,7 @@
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
-                    android:layout_width="200px"
+                    android:layout_width="180px"
                     android:layout_height="40px"
                     android:inputType="number"
                     android:textColor="#000000"
@@ -56,13 +55,12 @@
                     android:src="@drawable/cust"
                     android:background="@drawable/border_style" />
                 <TextView
-                    android:layout_width="190px"
+                    android:layout_width="145px"
                 android:paddingTop="5dp"
                     android:layout_height="36px"
                     android:inputType="number"
                     android:textColor="#000000"
                     android:text="Return Reason"
-                    android:fontFamily="sans-serif"
                     android:ems="10"
                     android:id="@+id/tv_reason"
                     android:textSize="20px"
@@ -70,14 +68,14 @@
                     android:layout_gravity="center_vertical"
                     />
                 <Spinner
-                    android:layout_width="260dp"
+                    android:layout_width="360dp"
                     android:layout_height="36px"
                     android:textColor="#000000"
                     android:ems="10"
                     android:layout_marginEnd="5dp"
                     android:id="@+id/reasonreturn"
                     android:textSize="14px"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     >
@@ -176,7 +174,6 @@
                     android:id="@+id/product6"
                     android:textSize="14px"
                     android:gravity="left"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
 
                     />
@@ -206,7 +203,6 @@
                 android:id="@+id/product8"
                 android:textSize="14px"
                 android:gravity="center"
-                android:fontFamily="sans-serif"
                 android:layout_gravity="center_vertical"
                 />
 
@@ -221,7 +217,6 @@
                     android:id="@+id/product9se"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"/>
 
                 <!--
@@ -251,7 +246,6 @@
                     android:id="@+id/product9"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
@@ -266,7 +260,6 @@
                     android:id="@+id/product10"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
 
@@ -280,7 +273,6 @@
                     android:id="@+id/product12"
                     android:textSize="14px"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
                     android:layout_gravity="center_vertical"
                     />
             </LinearLayout>
@@ -332,7 +324,6 @@
                             android:textColor="#000000"
                             android:id="@+id/totalitems"
                             android:textSize="14px"
-                            android:fontFamily="sans-serif"
                             android:layout_gravity="center_vertical"
                             android:gravity="left"
                             />
@@ -385,7 +376,6 @@
                             android:layout_gravity="center_vertical"
                             android:gravity="right"
                             android:layout_marginLeft="90dp"
-                            android:fontFamily="sans-serif"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -406,7 +396,6 @@
                             android:textSize="14px"
                             android:layout_gravity="center_vertical"
                             android:gravity="center"
-                            android:fontFamily="sans-serif"
                             />
                     </LinearLayout>
                 </LinearLayout>
@@ -437,7 +426,6 @@
                         android:textColor="#000000"
                         android:text="Submit"
                         android:ems="10"
-                        android:fontFamily="sans-serif"
                         android:id="@+id/salesreturn_submit"
                         android:textSize="24px"
                         android:gravity="center"
@@ -451,7 +439,6 @@
                     android:textColor="#000000"
                     android:text="Clear"
                     android:ems="10"
-                    android:fontFamily="sans-serif"
                     android:id="@+id/clear"
                     android:textSize="24px"
                     android:gravity="center"

@@ -257,7 +257,7 @@ public class PurchaseProductModelwithpo {
         this.ProductPrice=0.0F;
         this.discountitems=0;
         this.Batch_No="";
-        this.Exp_Date="YY/MM/DD";
+        this.Exp_Date="2019/12/31";
     }
 
     @Override

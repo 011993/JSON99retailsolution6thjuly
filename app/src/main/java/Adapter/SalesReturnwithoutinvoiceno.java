@@ -20,6 +20,7 @@ import com.mycompany.apps.DBhelper;
 import com.mycompany.apps.R;
 //import com.mycompany.apps.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import Pojo.PurchaseProductModel;
@@ -140,6 +141,7 @@ public class SalesReturnwithoutinvoiceno extends ArrayAdapter<SalesreturndetailW
             holder = (ViewHolder) convertView.getTag();
 
         }
+        DecimalFormat f= new DecimalFormat("##.00");
 //            holder.Transid.setText(salesreturnlist.get(position).getSaleTransid());
         // holder.Billno.setText(salesreturnlist.get(position).getSaleBillno());
         holder.productname.setText(salesreturnlist.get(position).getSaleproductname());
@@ -172,7 +174,7 @@ public class SalesReturnwithoutinvoiceno extends ArrayAdapter<SalesreturndetailW
 
         holder.total.setText(String.format("%.2f", salesreturnlist.get(position).getSaletotal()));
 
-        holder.total.setText(String.valueOf(Double.parseDouble(holder.sellingprice.getText().toString()) / (Double.parseDouble(holder.convertionfactorreturn.getText().toString())) * Double.parseDouble(holder.quantity.getText().toString())));
+        holder.total.setText(String.valueOf(f.format(Double.parseDouble(holder.sellingprice.getText().toString()) / (Double.parseDouble(holder.convertionfactorreturn.getText().toString())) * Double.parseDouble(holder.quantity.getText().toString()))));
         TextWatcher quantityTextChangeWatcher = new TextWatcher() {
 
             @Override
@@ -189,9 +191,9 @@ public class SalesReturnwithoutinvoiceno extends ArrayAdapter<SalesreturndetailW
             public void afterTextChanged(Editable s) {
                 try {
 
+DecimalFormat f= new DecimalFormat("##.00");
 
-
-                    holder.total.setText(String.valueOf(Double.parseDouble(holder.sellingprice.getText().toString()) / (Double.parseDouble(holder.convertionfactorreturn.getText().toString())) * Double.parseDouble(holder.quantity.getText().toString())));
+                    holder.total.setText(String.valueOf(f.format(Double.parseDouble(holder.sellingprice.getText().toString()) / (Double.parseDouble(holder.convertionfactorreturn.getText().toString())) * Double.parseDouble(holder.quantity.getText().toString()))));
 
                     salesreturnlist.get(position).setSaleqty(Float.parseFloat(holder.quantity.getText().toString()));
                     salesreturnlist.get(position).setSalesellingprice(Float.parseFloat(holder.sellingprice.getText().toString()));

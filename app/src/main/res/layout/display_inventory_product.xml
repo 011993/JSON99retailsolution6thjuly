@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
+            android:textSize="14px"
             android:layout_marginEnd="10dp"
             android:id="@+id/PurchaseproductId" />
 
@@ -24,6 +25,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
+            android:textSize="14px"
+
             android:layout_marginEnd="10dp"
             android:id="@+id/PurchaseproductName" />
 
@@ -32,6 +35,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
+            android:textSize="14px"
+
             android:id="@+id/PurchaseproductMRP"
             android:layout_marginEnd="10dp"/>
 

@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="50dp"
     android:background="#2787A4"
     android:id="@+id/Sub">
 
@@ -17,31 +17,46 @@
         android:textAlignment="textStart"
         android:layout_weight="10.0">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
+            android:background="#ffffff">
 
         <TextView
             android:id="@+id/rowtvVendr_Nm"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Grand Total"
             android:layout_weight="30.0"
             android:textColor="#000000"
             android:textSize="14px"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:paddingRight="10dp"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30.0"
+            android:background="#ffffff">
 
 
         <TextView
             android:id="@+id/rowtvVendr_Act"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Grand Total"
             android:layout_weight="30.0"
             android:textColor="#000000"
             android:textSize="14px"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:paddingRight="10dp"/>
+
+            </LinearLayout>
 
 
     </LinearLayout>

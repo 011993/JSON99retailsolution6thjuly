@@ -210,7 +210,7 @@ public class FragmentLocalProductCPGReport extends android.support.v4.app.Fragme
                 //Log.i("&&&&&&&&", "Adding " + arrayProductList.get(0) + " to Product List..");
                 localproductListAdapter.setList(arraylocalProductList);
                 localproductListAdapter.notifyDataSetChanged();
-                    autoCompleteTextView.setText("");
+                autoCompleteTextView.setText("");
 
             }
         });

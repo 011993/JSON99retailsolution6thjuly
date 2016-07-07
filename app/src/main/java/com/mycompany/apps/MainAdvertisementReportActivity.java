@@ -26,6 +26,7 @@ public class MainAdvertisementReportActivity extends Activity {
    StoreMainModel storeMainModel;
     DBhelper helper;
     ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

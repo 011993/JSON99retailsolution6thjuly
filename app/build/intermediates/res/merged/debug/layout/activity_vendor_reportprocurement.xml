@@ -195,7 +195,7 @@
     </LinearLayout>
 
 
-        <LinearLayout
+    <LinearLayout
             android:id="@+id/linearlayout2"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -203,48 +203,46 @@
             android:paddingTop="5dp"
             android:background="#4a4a4a"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="2dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:text="PO NO"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:id="@+id/tvPoNo"
                 android:textColor="#ffffff"
                 android:layout_weight="30.0"
                 android:textStyle="bold"
                 android:textSize="14dp"
                 android:fontFamily="sans_serif"
-                android:layout_gravity="center"
-                android:gravity="center" />
+
+                android:gravity="left" />
 
             <TextView
                 android:text="VENDOR NAME"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:id="@+id/tvVendNm"
                 android:textColor="#ffffff"
                 android:layout_weight="30.0"
                 android:textStyle="bold"
                 android:textSize="14dp"
                 android:fontFamily="sans_serif"
-                android:layout_gravity="center"
-                android:gravity="center" />
+
+                android:gravity="left" />
 
             <TextView
                 android:text="TOTAL"
                 android:id="@+id/tvTotal"
-                android:layout_width="70dp"
-                android:layout_height="30dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:textColor="#ffffff"
                 android:layout_weight="30.0"
                 android:textStyle="bold"
                 android:textSize="14dp"
                 android:fontFamily="sans_serif"
-                android:layout_gravity="center"
-                android:gravity="center" />
+
+                android:gravity="left" />
 
         </LinearLayout>
 

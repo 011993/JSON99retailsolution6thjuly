@@ -38,7 +38,7 @@ public class VendorReportModel
 
     @Override
     public String toString() {
-        return  Po_No+" "+Vendor_Nm+" "+Total;
+        return  Vendor_Nm;
     }
 
 

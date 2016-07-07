@@ -1,14 +1,19 @@
 package Adapter;
 
 import android.content.Context;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.mycompany.apps.DecimalDigitsInputFilter;
 import com.mycompany.apps.R;
 import com.mycompany.apps.ReportVendorReturnActivity;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import Pojo.ReportVendorReturnModel;
 
@@ -66,6 +71,7 @@ public class ReportVendorReturnAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+
         if (convertView==null)
         {
             layoutInflater=(LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -81,6 +87,8 @@ public class ReportVendorReturnAdapter extends BaseAdapter {
             holder.TVQTY=(TextView)convertView.findViewById(R.id.report_qty);
             holder.TVUNIT=(TextView)convertView.findViewById(R.id.report_unit);
             holder.TVTOTAL=(TextView)convertView.findViewById(R.id.report_total);
+          //  holder.TVTOTAL.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7,2)});
+
             convertView.setTag(holder);
         }
         else
