@@ -21,7 +21,6 @@ import Pojo.SaleReportModel;
 public class FragmentDailySalesReport extends android.support.v4.app.Fragment{
 
 
-    // add comment only....
     ListView listview;
    /* AutoCompleteTextView idTextView;
     private TextWatcher idTextWatcher;*/
@@ -29,13 +28,6 @@ public class FragmentDailySalesReport extends android.support.v4.app.Fragment{
     ArrayList<SaleReportModel>GetDailySales;
    /* ArrayList<SaleReportModel> searchIdList;
     ArrayList<SaleReportModel> arrayTotalList;
-
-
-
-
-    uuuSBD<Jcbagblcabjvdcvja,hv,cja,bv,hjsvbmhzh,vcb,z,v,hzh
-
-    //rajeevdiwan
 
     public Spinner FromMonth;
     public Spinner ToMonth;
